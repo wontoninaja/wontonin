@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+        <title>Order - Mini Wonton</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    
+    <body>
+        <!-- NAVBAR-->
+         <nav class="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="btn-back">Kembali ke Menu</a>
+            </div>
+         </nav>  
+
+        <!-- HEADER -->
+          <div class="header">
+          <h1>PESAN SEKARANG!!</h1>
+          <p class="tagline">
+            Mini Wonton Lezat • Praktis • Kekinian
+          </p>
+          </div>
+
+        <!-- FORM ORDER -->
+         <div class="container">
+        <!-- DATA CUSTOMER -->
+         <div class="form-box">
+            <input
+            type="text"
+            id="nama"
+            placeholder="Nama (untuk informasi pemesanan)" 
+            required>
+            <input
+            type="text"
+            id="wa"
+            placeholder="No WhatsApp (untuk informasi pemesanan)"
+            required>
+         </div>
+         <h2 class="judul produk">
+            Pilih Varian Wontonin
+         </h2>
+        <!-- LIST PRODUCT -->
+         <div class="card">
+        <!-- BANGKOK -->
+         <div class="item">
+            <div class="product-info">
+                <img src="images/gambar-saus-bangkok.jpg" class="product-img">
+                <div class="text-details">
+                    <span class="nama">Mini Wonton Goreng <span class="badge best">Best</span></span>
+                    <span class="varian">Saus Bangkok</span>
+                    <span class="harga">Rp9.000</span>
+                </div>
+            </div>
+            <div class="qty">
+                <button onclick="kurang('bangkok')">-</button>
+                <input
+                type="number"
+                id="bangkok"
+                value="0"
+                min="0"
+                oninput="hitungTotal()">
+                <button onclick="tambah('bangkok')">+</button>
+            </div>
+         </div>
+        <!-- HOT LAVA -->
+         <div class="item">
+            <div class="product-info">
+                <img src="images/gambar-saus-hot-lava.jpg" class="product-img">
+                <div class="text-details">
+                    <span class="nama">Mini Wonton Goreng <span class="badge best">Best</span></span>
+                    <span class="varian">Saus Hot Lava</span>
+                    <span class="harga">Rp9.000</span>
+                </div>
+            </div>
+            <div class="qty">
+                <button onclick="kurang('hot-lava')">-</button>
+                <input
+                type="number"
+                id="hot-lava"
+                value="0"
+                min="0"
+                oninput="hitungTotal()">
+                <button onclick="tambah('hot-lava')">+</button>
+            </div>
+         </div>
+        <!-- KEJU -->
+         <div class="item">
+            <div class="product-info">
+                <img src="images/gambar-saus-keju.jpg" class="product-img">
+                <div class="text-details">
+                    <span class="nama">Mini Wonton Goreng <span class="badge soon">Soon</span></span>
+                    <span class="varian">🔒***</span>
+                    <span class="harga"> </span>
+                </div>
+            </div>
+            <div class="qty">
+                <button onclick="kurang('keju')" disabled>-</button>
+                <input
+                type="number"
+                id="keju"
+                value="0"
+                min="0"
+                oninput="hitungTotal()" disabled>
+                <button onclick="tambah('keju')" disabled>+</button>
+            </div>
+         </div>
+        <!-- CHILI OIL -->
+         <div class="item">
+            <div class="product-info">
+                <img src="images/gambar-chili-oil.jpg" class="product-img">
+                <div class="text-details">
+                    <span class="nama">Mini Wonton Rebus <span class="badge hemat">Hemat</span></span>
+                    <span class="varian">Chili Oil</span>
+                    <span class="harga">Rp7.000</span>
+                </div>
+            </div>
+            <div class="qty">
+                <button onclick="kurang('chili-oil')">-</button>
+                <input
+                type="number"
+                id="chili-oil"
+                value="0"
+                min="0"
+                oninput="hitungTotal()">
+                <button onclick="tambah('chili-oil')">+</button>
+            </div>
+         </div>
+        <!-- KUAH ORIGINAL -->
+         <div class="item">
+            <div class="product-info">
+                <img src="images/gambar-kuah-original.jpg" class="product-img">
+                <div class="text-details">
+                    <span class="nama">Mini Wonton Rebus <span class="badge authentic">Authentic</span></span>
+                    <span class="varian">Kuah Original</span>
+                    <span class="harga">Rp10.000</span>
+                </div>
+            </div>
+            <div class="qty">
+                <button onclick="kurang('kuah-original')">-</button>
+                <input
+                type="number"
+                id="kuah-original"
+                value="0"
+                min="0"
+                oninput="hitungTotal()">
+                <button onclick="tambah('kuah-original')">+</button>
+            </div>
+         </div>
+         <!-- KUAH SEBLAK -->
+         <div class="item">
+            <div class="product-info">
+                <img src="images/gambar-kuah-seblak.jpg" class="product-img">
+                <div class="text-details">
+                    <span class="nama">Mini Wonton Rebus <span class="badge best">Best</span></span>
+                    <span class="varian">Kuah Seblak</span>
+                    <span class="harga">Rp10.000</span>
+                </div>
+            </div>
+            <div class="qty">
+                <button onclick="kurang('kuah-seblak')">-</button>
+                <input
+                type="number"
+                id="kuah-seblak"
+                value="0"
+                min="0"
+                oninput="hitungTotal()">
+                <button onclick="tambah('kuah-seblak')">+</button>
+            </div>
+         </div>
+        <!-- KUAH KEJU CREAMY -->
+         <div class="item">
+            <div class="product-info">
+                <img src="images/gambar-kuah-keju-creamy.jpg" class="product-img">
+                <div class="text-details">
+                    <span class="nama">Mini Wonton Rebus <span class="badge soon">Soon</span></span>
+                    <span class="varian">🔒***</span>
+                    <span class="harga"> </span>
+                </div>
+            </div>
+            <div class="qty">
+                <button onclick="kurang('kuah-keju-creamy')" disabled>-</button>
+                <input
+                type="number"
+                id="kuah-keju-creamy"
+                value="0"
+                min="0"
+                oninput="hitungTotal()" disabled>
+                <button onclick="tambah('kuah-keju-creamy')" disabled>+</button>
+            </div>
+         </div>
+        <!-- TOTAL -->
+         <div class="total-box">
+            Total Bayar
+            <b>
+                Rp <span id="total">0</span>
+            </b>
+         </div>
+        <!-- BUTTON -->
+         <button
+         type="button"
+         class="order-btn"
+         onclick="kirimPesanan()">
+        Pesan Sekarang
+        </button>
+         </div>
+         </div>
+         <script src="script.js"></script>
+    </body>
+</html>
