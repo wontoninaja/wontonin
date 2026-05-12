@@ -728,42 +728,98 @@ span.badge{
     box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Bayangan sangat tipis untuk HP */
   }
 
-  .container, .about-section, .product-section, .contact-section{
-    width: 100% !important;
-    padding: 15px !important;
-    box-sizing: border-box;
+    /* INDEX */
+  .menu-container {
+    padding-top: 0;
+    gap: 0;
   }
-  .product-grid{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
-    gap: 15px !important;
-    justify-content: center;
-  }
-  .product-img{
-    width: 100px !important;
-    height: 100px !important;
-  }
-  .navbar{
+  .navbar {
     padding: 10px;
-    position: relative;
     text-align: center;
   }
-  h1 {font-size: 1.8rem !important;}
-  h2 {font-size: 1.4rem !important;}
-  h3 {font-size: 0.95rem !important;}
+  .logo-top {
+    width: 80px;
+  }
+
+  /* HEADING */
+  h1 { font-size: 1.8rem !important; letter-spacing: 2px; }
+  h2 { font-size: 1.3rem !important; }
+  h3 { font-size: 0.95rem !important; }
+
+  /* ABOUT & SECTIONS */
+  .about-header, .about-section, .contact-header, .product-header, .header {
+    width: 92% !important;
+    padding: 20px !important;
+    margin: 10px auto !important;
+  }
+  .about-section p { font-size: 1rem; line-height: 1.6; text-align: left; }
+
+  /* CONTAINER ORDER */
+  .container {
+    width: 100% !important;
+    padding: 15px !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+  }
+
+  /* INPUT */
   input, textarea, select {
     width: 100% !important;
     margin-bottom: 10px;
+    box-sizing: border-box !important;
   }
-  .about-header h1{
-    font-size: 1.8rem;
+
+  /* ITEM ORDER - fix nama wrap */
+  .item {
+    padding: 10px 8px !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important;
   }
-  .about-section h2{
-    font-size: 1.8rem;
+  .item:hover { transform: none !important; }
+
+  .product-info { gap: 8px !important; }
+
+  .product-img {
+    width: 70px !important;
+    height: 70px !important;
+    min-width: 70px !important;
   }
-  .about-section p{
-    font-size: 1rem;
-    line-height: 1.6;
-    text-align: left;
+
+  span.nama {
+    font-size: 12px !important;
   }
+  .varian { font-size: 11px !important; }
+  .harga { font-size: 10px !important; }
+
+  .qty button {
+    width: 26px !important;
+    height: 26px !important;
+    font-size: 14px !important;
+  }
+  .qty input {
+    width: 35px !important;
+    margin: 0 4px !important;
+  }
+
+  /* PRODUCT GRID - 2 kolom di HP */
+  .product-section { padding: 20px 10px !important; }
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    width: 100% !important;
+    padding: 10px !important;
+  }
+  .product-card {
+    padding: 12px !important;
+  }
+  .product-card h3 { font-size: 13px !important; }
+  .product-card p { font-size: 12px !important; }
+
+  /* CONTACT */
+  .contact-section { padding: 15px !important; }
+  .contact-grid { gap: 12px !important; }
+
+  /* MAP */
+  .map-section { padding: 20px 10px !important; }
+  .map-frame iframe { height: 250px !important; }
 }
