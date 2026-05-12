@@ -13,8 +13,9 @@ body {
   align-items: center;
   justify-content: flex-start;
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
   overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 /* MENU */
@@ -735,7 +736,7 @@ span.badge{
   }
   .navbar {
     padding: 10px;
-    text-align: center;
+    text-align: left;
   }
   .logo-top {
     width: 80px;
