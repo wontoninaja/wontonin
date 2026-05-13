@@ -2,7 +2,13 @@ const scriptURL = "https://script.google.com/macros/s/AKfycbzGHeia4YvS_nn2ID9ZPi
 
 function getAffiliate() {
   const params = new URLSearchParams(window.location.search);
-  return params.get("ref") || "-"; // kalau ngga ada ref, isi "-"
+  const ref = params.get("ref");
+  
+  if (ref) {
+    localStorage.setItem("affiliate", ref); // simpan ke localStorage
+  }
+  
+  return localStorage.getItem("affiliate") || "-"; // ambil dari localStorage
 }
 
 function hitungTotal() {
