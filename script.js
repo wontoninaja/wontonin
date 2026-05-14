@@ -155,5 +155,9 @@ Saya ingin melakukan pembayaran. Tolong kirimkan Qris-nya ya`;
     "https://wa.me/628889976983?text=" +
     encodeURIComponent(pesanWA)
   );
-
 }
+
+// Taruh di paling bawah script.js, sebelum kurung tutup terakhir
+document.addEventListener("DOMContentLoaded", function() {
+  getAffiliate(); // simpan affiliate begitu halaman dibuka
+});
