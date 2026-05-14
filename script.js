@@ -5,10 +5,10 @@ function getAffiliate() {
   const ref = params.get("ref");
   
   if (ref) {
-    localStorage.setItem("affiliate", ref); // simpan ke localStorage
+    sessionStorage.setItem("affiliate", ref);
   }
   
-  return localStorage.getItem("affiliate") || "-"; // ambil dari localStorage
+  return sessionStorage.getItem("affiliate") || "-";
 }
 
 function hitungTotal() {
