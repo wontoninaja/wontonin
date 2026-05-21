@@ -1,6 +1,8 @@
-// music.js - SIMPLE WORKING VERSION
+// music.js - MANUAL PATH (ganti dengan URL yang bener)
 (function() {
-    // Buat tombol
+    // 🔥 GANTI URL INI DENGAN URL YANG BENER DARI BROWSER 🔥
+    var AUDIO_URL = 'https://wontoninaja.vercel.app/Wontonin_Makin_Enak.mp3';
+    
     var btn = document.createElement('button');
     btn.innerHTML = '🔇';
     btn.style.position = 'fixed';
@@ -17,15 +19,36 @@
     btn.style.zIndex = '9999';
     btn.style.boxShadow = '0 2px 10px rgba(0,0,0,0.3)';
     document.body.appendChild(btn);
-
-    // Buat audio
-    var audio = new Audio('Wontonin_Makin_Enak.mp3');
+    
+    // Test dengan fetch dulu biar keliatan
+    fetch(AUDIO_URL).then(function(res) {
+        console.log('Fetch result:', res.status, res.statusText);
+        if (res.ok) {
+            console.log('✅ File ditemukan di path:', AUDIO_URL);
+        } else {
+            console.error('❌ File TIDAK ditemukan di path:', AUDIO_URL);
+        }
+    }).catch(function(err) {
+        console.error('Fetch error:', err);
+    });
+    
+    var audio = new Audio(AUDIO_URL);
     audio.loop = true;
     audio.volume = 0.5;
-
+    
+    audio.addEventListener('error', function() {
+        console.error('❌ Audio error - path salah:', AUDIO_URL);
+        btn.style.backgroundColor = '#ff0000';
+        btn.innerHTML = '❌';
+    });
+    
+    audio.addEventListener('canplaythrough', function() {
+        console.log('✅ Audio siap diputar');
+        btn.style.backgroundColor = '#ff6600';
+    });
+    
     var isPlaying = false;
-
-    // Event klik tombol
+    
     btn.onclick = function() {
         if (isPlaying) {
             audio.pause();
@@ -35,24 +58,9 @@
             audio.play().then(function() {
                 btn.innerHTML = '🎵';
                 isPlaying = true;
-            }).catch(function(error) {
-                console.log('Play error:', error);
-                alert('Klik tombol lagi untuk memutar musik');
+            }).catch(function(e) {
+                console.error('Play error:', e);
             });
         }
     };
-
-    // Coba autoplay (kalau gagal, tombol akan berkedip)
-    audio.play().then(function() {
-        btn.innerHTML = '🎵';
-        isPlaying = true;
-    }).catch(function() {
-        // Autoplay gagal, buat tombol berkedip
-        var blinkCount = 0;
-        var blinkInterval = setInterval(function() {
-            btn.style.backgroundColor = blinkCount % 2 === 0 ? '#ff4400' : '#ff6600';
-            blinkCount++;
-            if (blinkCount > 6) clearInterval(blinkInterval);
-        }, 300);
-    });
 })();
