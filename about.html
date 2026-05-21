@@ -7,6 +7,20 @@
         <title>About Us - Wontonin</title>
         <link rel="stylesheet"
         href="style.css">
+        <!-- Tambahkan di head semua halaman -->
+         <script type="importmap">
+            {
+                "imports": {
+                    "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+                }
+            }
+        </script>
+        <style>
+        /* FIX WARNA TEKS ABOUT PAGE JADI PUTIH */
+        .about-header .description-text {
+            color: #ffffff !important;
+        }
+    </style>
     </head>
 
     <body>
@@ -21,12 +35,12 @@
             <h1>
                 Tentang Wontonin
             </h1>
-            <p>
+             <p class="description-text">
                 Camilan mini wonton yang dibuat oleh "All In Group"
                 yang memiliki keinginan untuk membuat produk camilan
                 yang bisa menjawab berbagai kondisi kebutuhan ngemil
                 di era yang serba cepat untuk para remaja hingga dewasa awal.
-            </p>
+             </p>
          </section>
         
         <!-- TUJUAN -->
@@ -34,12 +48,16 @@
             <h2>
                 Tujuan Bisnis
             </h2>
-            <p>
-                Mengembangkan dan menguji model bisnis camilan dalam periode 3 bulan
-                melalui implementasi sistem operasional, pemasaran, dan keuangan
-                dengan tujuan memperoleh pembelajaran praktis serta mencapai ROI positif
-                sebagai indikator kelayakan bisnis.
-            </p>
+            <ul>
+                Wontonin hadir untuk menyediakan camilan yang enak, praktis, dan
+                kekinian bagi anak muda dengan gaya hidup yang dinamis. Melalui
+                konsep mini wonton yang crispy, gurih, dan mudah dikonsumsi kapan
+                saja, Wontonin ingin menjadi pilihan camilan yang nyaman dinikmati
+                di berbagai situasi, baik saat belajar, bekerja, bersantai, maupun
+                berkumpul bersama teman. Dengan prinsip "apapun kondisinya, Wontonin
+                aja", kami berupaya menghadirkan pengalaman ngemil yang sederhana namun
+                tetap memuaskan.
+            </ul>
          </section>
 
         <!-- VISI MISI -->
@@ -48,11 +66,11 @@
                 Visi & Misi
             </h2>
             <h3>Visi</h3>
-            <p>
+            <ul>
                 Menjadi brand camilan pilihan generasi muda di Indonesia yang
                 enak, praktis, kekinian, serta memberikan dampak sosial nyata
                 bagi pelanggan, mitra, lingkungan, dan keluarga All In Group.
-            </p>
+            </ul>
             <h3>Misi</h3>
             <ul>
                 <li>
@@ -83,13 +101,13 @@
             <h2>
                 Sejarah Singkat
             </h2>
-            <p>
+            <ul>
                 Sejak COVID-19, zaman terasa berjalan begitu cepat. Pasar Camilan, yang kini
                 telah didominasi oleh Milenial dan Gen-Z, menuntut pengusaha untuk beradaptasi
                 lebih cepat untuk bisa memenuhi kebutuhan pasar dalam mengonsumsi camilan. 
                 "All In Group", hadir untuk membuat produk camilan yang bisa menjawab 
                 kebutuhan pasar yang serba cepat dan penuh trend. 
-            </p>
+            </ul>
          </section>
 
         <!-- KEUNGGULAN -->
@@ -99,39 +117,32 @@
             </h2>
             <div class="why-grid">
                 <div class="why-card">
-                    <h3>🍡 Rasa Enak</h3>
+                    <h4>🔥 Rasa Enak & Nagih</h4>
                     <p>
-                        Dibuat dengan bahan
-                        berkualitas
-                        dan rasa yang konsisten.
+                        Perpaduan mini wonton rebus yang lembut dan goreng yang crispy dengan bumbu khas bercita rasa gurih pedas.
                     </p>
                 </div>
                 <div class="why-card">
-                    <h3>💰 Harga Terjangkau</h3>
+                    <h4>✨ Kekinian</h4>
                     <p>
-                        Harga ramah di kantong
-                        untuk semua kalangan.
+                        Hadir dengan beragam varian rasa favorit yang sedang trend dan digemari banyak kalangan.
                     </p>
                 </div>
                 <div class="why-card">
-                    <h3>⚡ Pelayanan Cepat</h3>
+                    <h4>⚡ Praktis</h4>
                     <p>
-                        Pesanan diproses
-                        dengan cepat
-                        dan rapi.
+                        Dikemas praktis untuk memudahkan dalam menikmati mini wonton di setiap aktivitas.
                     </p>
                 </div>
                 <div class="why-card">
-                    <h3>🧾 Mudah Dipesan</h3>
+                    <h4>🏠 Mudah Dipesan</h4>
                     <p>
-                        Pesan langsung
-                        melalui website
-                        dan media sosial
-                        (WhatsApp, Instagram,
-                        Facebook, Telegram)
+                        Praktis dipesan melalui WhatsApp, Instagram, dan Telegram.
                     </p>
                 </div>
             </div>
          </section>
+         <!-- ELECTRIC BORDER -->
+         <script src="electric.js"></script>
     </body>
 </html>

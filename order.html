@@ -6,6 +6,14 @@
         content="width=device-width, initial-scale=1.0">
         <title>Order - Mini Wonton</title>
         <link rel="stylesheet" href="style.css">
+        <!-- Tambahkan di head semua halaman -->
+         <script type="importmap">
+            {
+                "imports": {
+                    "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+                }
+            }
+        </script>
     </head>
     
     <body>
@@ -44,14 +52,14 @@
          </h2>
         <!-- LIST PRODUCT -->
          <div class="card">
-        <!-- BANGKOK -->
+        <!-- GORENG BANGKOK -->
          <div class="item">
             <div class="product-info">
                 <img src="images/gambar-saus-bangkok.jpg" class="product-img">
                 <div class="text-details">
-                    <span class="nama">Mini Wonton Goreng <span class="badge best">Best</span></span>
+                    <span class="nama">Mini Wonton Goreng <span class="badge "></span></span>
                     <span class="varian">Saus Bangkok</span>
-                    <span class="harga">Rp9.000</span>
+                    <span class="harga">Rp8.000</span>
                 </div>
             </div>
             <div class="qty">
@@ -65,14 +73,14 @@
                 <button onclick="tambah('bangkok')">+</button>
             </div>
          </div>
-        <!-- HOT LAVA -->
+        <!-- GORENG HOT LAVA -->
          <div class="item">
             <div class="product-info">
                 <img src="images/gambar-saus-hot-lava.jpg" class="product-img">
                 <div class="text-details">
-                    <span class="nama">Mini Wonton Goreng <span class="badge best">Best</span></span>
+                    <span class="nama">Mini Wonton Goreng <span class="badge "></span></span>
                     <span class="varian">Saus Hot Lava</span>
-                    <span class="harga">Rp9.000</span>
+                    <span class="harga">Rp8.000</span>
                 </div>
             </div>
             <div class="qty">
@@ -86,12 +94,12 @@
                 <button onclick="tambah('hot-lava')">+</button>
             </div>
          </div>
-        <!-- KEJU -->
+        <!-- GORENG KEJU -->
          <div class="item">
             <div class="product-info">
                 <img src="images/gambar-saus-keju.jpg" class="product-img">
                 <div class="text-details">
-                    <span class="nama">Mini Wonton Goreng <span class="badge soon">Soon</span></span>
+                    <span class="nama">Mini Wonton Goreng <span class="badge "></span></span>
                     <span class="varian">🔒***</span>
                     <span class="harga"> </span>
                 </div>
@@ -107,12 +115,54 @@
                 <button onclick="tambah('keju')" disabled>+</button>
             </div>
          </div>
-        <!-- CHILI OIL -->
+        <!-- REBUS BANGKOK -->
+         <div class="item">
+            <div class="product-info">
+                <img src="images/gambar-rebus-bangkok.jpg" class="product-img">
+                <div class="text-details">
+                    <span class="nama">Mini Wonton Rebus <span class="badge "></span></span>
+                    <span class="varian">Saus Bangkok</span>
+                    <span class="harga">Rp7.000</span>
+                </div>
+            </div>
+            <div class="qty">
+                <button onclick="kurang('saus-bangkok')">-</button>
+                <input
+                type="number"
+                id="saus-bangkok"
+                value="0"
+                min="0"
+                oninput="hitungTotal()">
+                <button onclick="tambah('saus-bangkok')">+</button>
+            </div>
+         </div>
+        <!-- REBUS HOT LAVA -->
+         <div class="item">
+            <div class="product-info">
+                <img src="images/gambar-rebus-hot-lava.jpg" class="product-img">
+                <div class="text-details">
+                    <span class="nama">Mini Wonton Rebus <span class="badge "></span></span>
+                    <span class="varian">Saus Hot Lava</span>
+                    <span class="harga">Rp7.000</span>
+                </div>
+            </div>
+            <div class="qty">
+                <button onclick="kurang('saus-hot-lava')">-</button>
+                <input
+                type="number"
+                id="saus-hot-lava"
+                value="0"
+                min="0"
+                oninput="hitungTotal()">
+                <button onclick="tambah('saus-hot-lava')">+</button>
+            </div>
+         </div>
+        <!-- REBUS CHILI OIL -->
          <div class="item">
             <div class="product-info">
                 <img src="images/gambar-chili-oil.jpg" class="product-img">
                 <div class="text-details">
-                    <span class="nama">Mini Wonton Rebus <span class="badge hemat">Hemat</span></span>
+                    <span class="nama">Mini Wonton Rebus <span class="badge "></span></span>
                     <span class="varian">Chili Oil</span>
                     <span class="harga">Rp7.000</span>
                 </div>
@@ -133,7 +183,7 @@
             <div class="product-info">
                 <img src="images/gambar-kuah-original.jpg" class="product-img">
                 <div class="text-details">
-                    <span class="nama">Mini Wonton Rebus <span class="badge authentic">Authentic</span></span>
+                    <span class="nama">Mini Wonton Rebus <span class="badge "></span></span>
                     <span class="varian">Kuah Original</span>
                     <span class="harga">Rp10.000</span>
                 </div>
@@ -154,7 +204,7 @@
             <div class="product-info">
                 <img src="images/gambar-kuah-seblak.jpg" class="product-img">
                 <div class="text-details">
-                    <span class="nama">Mini Wonton Rebus <span class="badge best">Best</span></span>
+                    <span class="nama">Mini Wonton Rebus <span class="badge "></span></span>
                     <span class="varian">Kuah Seblak</span>
                     <span class="harga">Rp10.000</span>
                 </div>
@@ -175,7 +225,7 @@
             <div class="product-info">
                 <img src="images/gambar-kuah-keju-creamy.jpg" class="product-img">
                 <div class="text-details">
-                    <span class="nama">Mini Wonton Rebus <span class="badge soon">Soon</span></span>
+                    <span class="nama">Mini Wonton Rebus <span class="badge "></span></span>
                     <span class="varian">🔒***</span>
                     <span class="harga"> </span>
                 </div>
@@ -208,5 +258,6 @@
          </div>
          </div>
          <script src="script.js"></script>
+         <script src="electric.js"></script>
     </body>
 </html>

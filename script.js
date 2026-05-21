@@ -16,6 +16,8 @@ function hitungTotal() {
   const bangkok = document.getElementById("bangkok").value;
   const hotLava = document.getElementById("hot-lava").value;
   const keju = document.getElementById("keju").value;
+  const sausBangkok = document.getElementById("saus-bangkok").value;
+  const sausHotLava = document.getElementById("saus-hot-lava").value;
   const chiliOil = document.getElementById("chili-oil").value;
   const kuahOriginal = document.getElementById("kuah-original").value;
   const kuahSeblak = document.getElementById("kuah-seblak").value;
@@ -23,9 +25,11 @@ function hitungTotal() {
 
   let total = 0;
 
-  total += bangkok * 9000;
-  total += hotLava * 9000;
-  total += keju * 9000;
+  total += bangkok * 8000;
+  total += hotLava * 8000;
+  total += keju * 8000;
+  total += sausBangkok * 7000;
+  total += sausHotLava * 7000;
   total += chiliOil * 7000;
   total += kuahOriginal * 10000;
   total += kuahSeblak * 10000;
@@ -71,6 +75,8 @@ function kirimPesanan() {
   const bangkok = parseInt(document.getElementById("bangkok").value) || 0;
   const hotLava = parseInt(document.getElementById("hot-lava").value) || 0;
   const keju = parseInt(document.getElementById("keju").value) || 0;
+  const sausBangkok = parseInt(document.getElementById("saus-bangkok").value) || 0;
+  const sausHotLava = parseInt(document.getElementById("saus-hot-lava").value) || 0;
   const chiliOil = parseInt(document.getElementById("chili-oil").value) || 0;
   const kuahOriginal = parseInt(document.getElementById("kuah-original").value) || 0;
   const kuahSeblak = parseInt(document.getElementById("kuah-seblak").value) || 0;
@@ -83,7 +89,7 @@ function kirimPesanan() {
   }
 
   // VALIDASI: minimal 1 item dipesan
-  const totalItem = bangkok + hotLava + keju + chiliOil + kuahOriginal + kuahSeblak + kuahKejuCreamy;
+  const totalItem = bangkok + hotLava + keju + sausBangkok + sausHotLava + chiliOil + kuahOriginal + kuahSeblak + kuahKejuCreamy;
   if (totalItem === 0) {
     alert("Pilih minimal 1 produk dulu!");
     return;
@@ -94,17 +100,27 @@ function kirimPesanan() {
 
   if (bangkok > 0) {
     detail += `Mini Wonton Goreng Saus Bangkok (${bangkok})\n`;
-    total += bangkok * 9000;
+    total += bangkok * 8000;
   }
 
   if (hotLava > 0) {
     detail += `Mini Wonton Goreng Saus Hot Lava (${hotLava})\n`;
-    total += hotLava * 9000;
+    total += hotLava * 8000;
   }
 
   if (keju > 0) {
     detail += `Mini Wonton Goreng Saus Keju (${keju})\n`;
-    total += keju * 9000;
+    total += keju * 8000;
+  }
+
+  if (sausBangkok > 0) {
+    detail += `Mini Wonton Rebus Saus Bangkok (${sausBangkok})\n`;
+    total += sausBangkok * 7000;
+  }
+
+  if (sausHotLava > 0) {
+    detail += `Mini Wonton Rebus Saus Hot Lava (${sausHotLava})\n`;
+    total += sausHotLava * 7000;
   }
 
   if (chiliOil > 0) {
@@ -152,7 +168,7 @@ Total: Rp ${total.toLocaleString("id-ID")}
 Saya ingin melakukan pembayaran. Tolong kirimkan Qris-nya ya`;
 
   window.open(
-    "https://wa.me/628889976983?text=" +
+    "https://wa.me/628132524282?text=" +
     encodeURIComponent(pesanWA)
   );
 }

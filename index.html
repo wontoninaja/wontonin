@@ -1,27 +1,178 @@
 <!DOCTYPE html>
 <html lang="id">
-    <head>
-        <meta charset="UTF-8">
-        <META NAME="viewport"
-        content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet"
-        href="style.css">
-    </head>
-
-    <body>
-        <!-- NAVBAR -->
-         <nav class="navbar">
-            <img src="images/logo.jpg" class="logo-top">
-         </nav>
-        <!-- CONTAINER -->
-         <div class="menu-container">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Wontonin - Home</title>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: black;
+            overflow-x: hidden;
+            font-family: 'Segoe UI', 'Poppins', sans-serif;
+            min-height: 100vh;
+        }
+        
+        #hyperspeed-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        /* MASKOT - FULL SCREEN */
+        #mascot-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            pointer-events: none;
+            overflow: visible;
+        }
+        
+        .index-content {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            pointer-events: auto;
+        }
+        
+        .index-content .navbar {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .index-content .logo-top {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ff6600;
+            box-shadow: 0 0 20px rgba(255,102,0,0.5);
+            background: white;
+        }
+        
+        .index-content .menu-container {
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            background: transparent;
+            border-radius: 30px;
+        }
+        
+        .index-content .menu-container h1 {
+            font-size: 4rem;
+            font-family: 'Arial Black', 'Impact', sans-serif;
+            font-weight: 900;
+            color: #ff8844;
+            text-shadow: 0 0 15px #ff4400, 0 0 30px #ff2200;
+            margin-bottom: 40px;
+            letter-spacing: 0.1em;
+        }
+        
+        .index-content .options {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            width: 100%;
+        }
+        
+        .index-content .options .card {
+            display: block;
+            text-decoration: none;
+            padding: 14px 35px;
+            background: rgba(0, 0, 0, 0.65);
+            border: 2px solid #ff6600;
+            border-radius: 50px;
+            color: #ffaa66;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: 220px;
+        }
+        
+        .index-content .options .card:hover {
+            background: #ff6600;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255,102,0,0.5);
+        }
+        
+        @media (max-width: 600px) {
+            .index-content .menu-container h1 {
+                font-size: 2.8rem;
+                margin-bottom: 30px;
+            }
+            .index-content .options .card {
+                width: 200px;
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            .index-content .logo-top {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="hyperspeed-bg"></div>
+    <div id="mascot-container"></div>
+    
+    <div class="index-content">
+        <nav class="navbar">
+            <img src="images/logo.jpg" class="logo-top" alt="Logo">
+        </nav>
+        <div class="menu-container">
             <h1>WONTONIN</h1>
-            <div class ="options">
+            <div class="options">
                 <a href="about.html" class="card">Tentang Kami</a>
                 <a href="product.html" class="card">Produk Kami</a>
-                <a href="order.html" class="card">Order</a>
+                <a href="order.html" class="card">Pesan</a>
                 <a href="contact.html" class="card">Kontak Kami</a>
             </div>
-        </div>
-    </body>
+        </div> 
+    </div>
+    
+    <script type="module">
+        import initHyperspeed from './hyperspeed.js';
+        import { initMascotWalker } from './mascotWalker.js';
+        
+        initHyperspeed('hyperspeed-bg');
+        
+        initMascotWalker('mascot-container', 'images/maskot.jpg', {
+            width: 80,
+            height: 80
+        });
+    </script>
+    
+    <script src="electric.js"></script>
+</body>
 </html>
