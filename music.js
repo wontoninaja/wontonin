@@ -1,39 +1,46 @@
-// music.js - Lagu continues antar halaman (FIX HP)
+// music.js - PASTI JALAN DI HP (TANPA ALERT ERROR)
 
 (function () {
+    // NAMA FILE ASLI LO
     const MUSIC_SRC = 'Wontonin_Makin_Enak.mp3';
     const STORAGE_KEY = 'wontonin_music_time';
     const PLAYING_KEY = 'wontonin_music_playing';
 
-    // Deteksi apakah di mobile
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-    // Ambil posisi terakhir
     const savedTime = parseFloat(sessionStorage.getItem(STORAGE_KEY) || '0');
     const wasPlaying = sessionStorage.getItem(PLAYING_KEY) !== 'false';
 
-    // Buat audio element
     const audio = new Audio();
     audio.src = MUSIC_SRC;
     audio.loop = true;
     audio.volume = 0.4;
     audio.preload = 'auto';
 
-    if (savedTime > 0 && !isNaN(savedTime)) {
+    if (savedTime > 0 && !isNaN(savedTime) && savedTime < 3600) {
         audio.currentTime = savedTime;
     }
 
-    console.log('Music loaded, isMobile:', isMobile);
+    console.log('Music file:', MUSIC_SRC);
+    console.log('Device:', isMobile ? 'MOBILE' : 'LAPTOP');
 
-    // Simpan posisi setiap detik
+    // Debug error - TAPI TIDAK TAMPILKAN ALERT
+    audio.addEventListener('error', (e) => {
+        console.error('Audio error - file tidak ditemukan atau corrupt');
+        console.error('Pastikan file "Wontonin_Makin_Enak.mp3" ada di folder yang sama');
+    });
+
+    audio.addEventListener('canplaythrough', () => {
+        console.log('Audio siap diputar');
+    });
+
+    // Simpan posisi
     let saveInterval = setInterval(() => {
-        if (!audio.paused && !isNaN(audio.currentTime) && isFinite(audio.currentTime)) {
+        if (!audio.paused && !isNaN(audio.currentTime)) {
             sessionStorage.setItem(STORAGE_KEY, audio.currentTime);
             sessionStorage.setItem(PLAYING_KEY, 'true');
         }
     }, 1000);
 
-    // Simpan posisi sebelum pindah halaman
     window.addEventListener('beforeunload', () => {
         if (!audio.paused && !isNaN(audio.currentTime)) {
             sessionStorage.setItem(STORAGE_KEY, audio.currentTime);
@@ -42,15 +49,12 @@
         clearInterval(saveInterval);
     });
 
-    // Buat tombol musik (pojok kanan bawah)
+    // ========== TOMBOL MUSIK ==========
     const btn = document.createElement('div');
     btn.id = 'music-btn';
-    btn.innerHTML = '🎵';
+    btn.innerHTML = '🔇';
     
-    // Tombol lebih besar di HP
-    const btnSize = isMobile ? '56px' : '48px';
-    const fontSize = isMobile ? '24px' : '20px';
-    
+    const btnSize = isMobile ? '60px' : '48px';
     btn.style.cssText = `
         position: fixed;
         bottom: 20px;
@@ -58,48 +62,34 @@
         width: ${btnSize};
         height: ${btnSize};
         border-radius: 50%;
-        background: rgba(0,0,0,0.8);
-        border: 2px solid #ff6600;
+        background: #ff6600;
         color: white;
-        font-size: ${fontSize};
+        font-size: 28px;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         z-index: 9999;
-        transition: all 0.3s;
-        box-shadow: 0 0 15px rgba(255,102,0,0.5);
-        user-select: none;
-        backdrop-filter: blur(4px);
+        box-shadow: 0 0 15px rgba(0,0,0,0.3);
+        transition: all 0.2s;
     `;
 
-    // Animasi berkedip untuk HP (biar user tahu harus diklik)
     const style = document.createElement('style');
     style.textContent = `
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 15px rgba(255,102,0,0.5); }
-            50% { transform: scale(1.1); box-shadow: 0 0 25px rgba(255,102,0,0.9); }
-            100% { transform: scale(1); box-shadow: 0 0 15px rgba(255,102,0,0.5); }
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
         #music-btn.playing {
             animation: spin 3s linear infinite;
-            border-color: #ff6600;
-            box-shadow: 0 0 20px rgba(255,102,0,0.7);
         }
         #music-btn.pulse {
-            animation: pulse 1s ease infinite;
-        }
-        #music-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 25px rgba(255,102,0,0.8);
-        }
-        #music-btn.playing:hover {
-            animation: spin 3s linear infinite;
-            transform: scale(1.1);
+            animation: bounce 0.6s ease infinite;
+            background: #ff4400;
         }
     `;
     document.head.appendChild(style);
@@ -111,31 +101,27 @@
             btn.classList.remove('pulse');
         } else {
             btn.classList.remove('playing');
-            // Di HP, tambahkan animasi berkedip biar user tahu harus klik
-            if (isMobile && !playing) {
-                btn.classList.add('pulse');
-            }
+            if (isMobile) btn.classList.add('pulse');
         }
     }
 
-    // Fungsi untuk memutar musik
-    function startMusic() {
-        if (savedTime > 0 && !isNaN(savedTime) && savedTime < audio.duration) {
-            audio.currentTime = savedTime;
-        }
+    function playMusic() {
         return audio.play();
     }
 
-    // Tombol musik
     btn.addEventListener('click', (e) => {
         e.stopPropagation();
         if (audio.paused) {
-            startMusic().then(() => {
+            playMusic().then(() => {
                 updateBtn(true);
                 sessionStorage.setItem(PLAYING_KEY, 'true');
-                console.log('Music started by button');
+                console.log('Music started by user click');
+                // Hapus overlay jika ada
+                const overlay = document.getElementById('music-start-overlay');
+                if (overlay) overlay.remove();
             }).catch((err) => {
                 console.error('Play failed:', err);
+                // TIDAK ADA ALERT - hanya log ke console
             });
         } else {
             audio.pause();
@@ -146,42 +132,81 @@
 
     document.body.appendChild(btn);
 
-    // Coba autoplay (hanya berhasil di laptop)
-    if (wasPlaying) {
-        startMusic().then(() => {
+    // ========== OVERLAY UNTUK HP ==========
+    let overlayAdded = false;
+    
+    function showOverlay() {
+        if (overlayAdded) return;
+        if (document.getElementById('music-start-overlay')) return;
+        
+        const overlay = document.createElement('div');
+        overlay.id = 'music-start-overlay';
+        overlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-family: sans-serif;
+        `;
+        
+        overlay.innerHTML = `
+            <div style="text-align: center; padding: 20px;">
+                <div style="font-size: 80px; margin-bottom: 20px;">🎵</div>
+                <h2 style="color: #ff8844; margin-bottom: 15px;">WONTONIN</h2>
+                <p style="color: white; margin-bottom: 10px; font-size: 18px;">Klik di mana saja untuk memutar musik</p>
+                <p style="color: #ffaa66; font-size: 14px; margin-top: 30px;">⬇️ Tekan layar ⬇️</p>
+            </div>
+        `;
+        
+        const startMusicAndRemoveOverlay = () => {
+            playMusic().then(() => {
+                updateBtn(true);
+                sessionStorage.setItem(PLAYING_KEY, 'true');
+                console.log('Music started via overlay');
+                overlay.remove();
+            }).catch((err) => {
+                console.error('Play failed:', err);
+                // Coba lagi dengan delay
+                setTimeout(() => {
+                    playMusic().catch(e => console.log('Retry failed'));
+                }, 100);
+            });
+        };
+        
+        overlay.addEventListener('click', startMusicAndRemoveOverlay);
+        overlay.addEventListener('touchstart', startMusicAndRemoveOverlay);
+        
+        document.body.appendChild(overlay);
+        overlayAdded = true;
+    }
+    
+    // DI HP: TAMPILKAN OVERLAY
+    if (isMobile && !sessionStorage.getItem('music_started_before')) {
+        showOverlay();
+    }
+    
+    // DI LAPTOP: coba autoplay (tanpa alert error)
+    if (!isMobile && wasPlaying) {
+        playMusic().then(() => {
             updateBtn(true);
-            console.log('Autoplay success');
         }).catch(() => {
-            console.log('Autoplay blocked, waiting for button click');
             updateBtn(false);
+            // Tidak ada alert - user tinggal klik tombol manual
         });
-    } else {
+    } else if (!isMobile) {
         updateBtn(false);
     }
     
-    // TAMPILKAN PESAN SINGKAT DI HP (hanya sekali)
-    if (isMobile && !sessionStorage.getItem('music_tip_shown')) {
-        setTimeout(() => {
-            const tip = document.createElement('div');
-            tip.innerHTML = '🔊 Klik tombol musik di pojok kanan bawah untuk memutar lagu';
-            tip.style.cssText = `
-                position: fixed;
-                bottom: 90px;
-                right: 20px;
-                background: rgba(0,0,0,0.8);
-                color: #ffaa66;
-                padding: 8px 15px;
-                border-radius: 20px;
-                font-size: 12px;
-                z-index: 9998;
-                border: 1px solid #ff6600;
-                pointer-events: none;
-                white-space: nowrap;
-                font-family: sans-serif;
-            `;
-            document.body.appendChild(tip);
-            setTimeout(() => tip.remove(), 4000);
-            sessionStorage.setItem('music_tip_shown', 'true');
-        }, 1000);
-    }
+    // Tandai sudah pernah mulai musik
+    audio.addEventListener('play', () => {
+        sessionStorage.setItem('music_started_before', 'true');
+    });
 })();
