@@ -1,11 +1,11 @@
-// music.js - Lagu continues antar halaman (TIDAK NGULANG)
+// music.js - Lagu continues antar halaman (TANPA OVERLAY)
 
 (function () {
     const MUSIC_SRC = 'Wontonin_Makin_Enak.mp3';
     const STORAGE_KEY = 'wontonin_music_time';
     const PLAYING_KEY = 'wontonin_music_playing';
 
-    // Ambil posisi terakhir sebelum membuat audio baru
+    // Ambil posisi terakhir
     const savedTime = parseFloat(sessionStorage.getItem(STORAGE_KEY) || '0');
     const wasPlaying = sessionStorage.getItem(PLAYING_KEY) !== 'false';
 
@@ -16,18 +16,11 @@
     audio.volume = 0.4;
     audio.preload = 'auto';
 
-    // SET POSISI LAGU KE POSISI TERAKHIR (PENTING!)
-    audio.currentTime = savedTime;
+    if (savedTime > 0 && !isNaN(savedTime)) {
+        audio.currentTime = savedTime;
+    }
 
-    console.log('Music loaded, starting at:', savedTime, 'seconds');
-
-    audio.addEventListener('canplaythrough', () => {
-        console.log('Music file loaded successfully!');
-    });
-    
-    audio.addEventListener('error', (e) => {
-        console.error('ERROR loading music file:', e);
-    });
+    console.log('Music loaded, starting at:', savedTime);
 
     // Simpan posisi setiap detik
     let saveInterval = setInterval(() => {
@@ -104,11 +97,22 @@
         }
     }
 
-    btn.addEventListener('click', () => {
+    // Fungsi untuk memutar musik
+    function startMusic() {
+        if (savedTime > 0 && !isNaN(savedTime) && savedTime < audio.duration) {
+            audio.currentTime = savedTime;
+        }
+        return audio.play();
+    }
+
+    // Tombol musik
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
         if (audio.paused) {
-            audio.play().then(() => {
+            startMusic().then(() => {
                 updateBtn(true);
                 sessionStorage.setItem(PLAYING_KEY, 'true');
+                console.log('Music started by button');
             }).catch((err) => {
                 console.error('Play failed:', err);
             });
@@ -121,45 +125,16 @@
 
     document.body.appendChild(btn);
 
-    // Autoplay dan set posisi lagu
-    function tryPlay() {
-        if (wasPlaying && savedTime > 0) {
-            // Langsung set posisi dan play
-            audio.currentTime = savedTime;
-            audio.play().then(() => {
-                updateBtn(true);
-                console.log('Music playing from position:', savedTime);
-            }).catch((err) => {
-                console.log('Autoplay blocked, waiting for user interaction');
-                updateBtn(false);
-                const playOnInteract = () => {
-                    audio.currentTime = savedTime;
-                    audio.play().then(() => {
-                        updateBtn(true);
-                        console.log('Music started after user interaction');
-                    }).catch(e => console.log('Still blocked:', e));
-                    document.removeEventListener('click', playOnInteract);
-                    document.removeEventListener('touchstart', playOnInteract);
-                };
-                document.addEventListener('click', playOnInteract);
-                document.addEventListener('touchstart', playOnInteract);
-            });
-        } else if (wasPlaying) {
-            // Play dari awal
-            audio.play().then(() => {
-                updateBtn(true);
-                console.log('Music playing from start');
-            }).catch(() => {
-                updateBtn(false);
-            });
-        } else {
+    // Coba autoplay (hanya berhasil di laptop, di HP butuh klik tombol)
+    if (wasPlaying) {
+        startMusic().then(() => {
+            updateBtn(true);
+            console.log('Autoplay success');
+        }).catch(() => {
+            console.log('Autoplay blocked, user must click music button');
             updateBtn(false);
-        }
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', tryPlay);
+        });
     } else {
-        tryPlay();
+        updateBtn(false);
     }
 })();
