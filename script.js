@@ -11,6 +11,7 @@ const TANGGAL_KUNCI_SOLD_OUT = new Set([
   "2026-05-26",
   "2026-05-27",
   "2026-05-29",
+  "2026-06-01"
 ]);
 const JENDELA_HARI_TAMPIL = 14;
 
