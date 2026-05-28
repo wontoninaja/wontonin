@@ -7,7 +7,6 @@ const API_LOG = "[MiniWonton API]";
 const TANGGAL_MULAI_BISNIS = "2026-05-25";
 const TANGGAL_LIBUR = new Set([
   "2026-05-28",
-  "2026-05-30",
   "2026-05-31",
   "2026-06-01",
   "2026-06-07",
@@ -175,7 +174,9 @@ function apiRequestJsonp(action, params = {}) {
     const timeoutMs = 20000;
     const timeoutId = setTimeout(() => {
       cleanup();
-      const err = new Error(`JSONP timeout setelah ${timeoutMs}ms (action: ${action})`);
+      const err = new Error(
+        `JSONP timeout setelah ${timeoutMs}ms (action: ${action})`,
+      );
       console.error(API_LOG, err.message);
       reject(err);
     }, timeoutMs);
@@ -307,7 +308,11 @@ async function cekKuotaTanggal(tanggal) {
   }
 
   if (!isTanggalBolehDipesan(dateYMD)) {
-    console.log(API_LOG, "cekKuotaTanggal: tanggal tidak boleh dipesan", dateYMD);
+    console.log(
+      API_LOG,
+      "cekKuotaTanggal: tanggal tidak boleh dipesan",
+      dateYMD,
+    );
     return {
       date: dateYMD,
       count: MAX_ORDER_PER_DAY,
@@ -325,8 +330,7 @@ async function cekKuotaTanggal(tanggal) {
     const count = Number.parseInt(json.count, 10) || 0;
     const max = Number.parseInt(json.max, 10) || MAX_ORDER_PER_DAY;
     const available =
-      json.available === true ||
-      (json.full !== true && count < max);
+      json.available === true || (json.full !== true && count < max);
 
     const result = {
       date: json.date ? normalizeDateYMD(json.date) : dateYMD,
@@ -352,7 +356,10 @@ async function cekKuotaTanggal(tanggal) {
 async function loadAvailableDates() {
   const dateSelect = document.getElementById("delivery-date-select");
   if (!dateSelect) {
-    console.warn(API_LOG, "loadAvailableDates: #delivery-date-select tidak ada");
+    console.warn(
+      API_LOG,
+      "loadAvailableDates: #delivery-date-select tidak ada",
+    );
     return;
   }
 
@@ -372,7 +379,11 @@ async function loadAvailableDates() {
         new Option("-- Tidak ada tanggal tersedia (data kosong) --", ""),
       );
       dateSelect.disabled = true;
-      console.warn(API_LOG, "loadAvailableDates: array kosong setelah normalisasi", json);
+      console.warn(
+        API_LOG,
+        "loadAvailableDates: array kosong setelah normalisasi",
+        json,
+      );
       return;
     }
 
@@ -397,9 +408,7 @@ async function loadAvailableDates() {
       stack: err.stack,
     });
     dateSelect.options.length = 0;
-    dateSelect.add(
-      new Option(`-- Gagal memuat: ${err.message} --`, ""),
-    );
+    dateSelect.add(new Option(`-- Gagal memuat: ${err.message} --`, ""));
     dateSelect.disabled = true;
     window.datesLoaded = false;
   }
@@ -509,7 +518,10 @@ function bukaWhatsApp(isiPesan) {
   const urlAman = buildWhatsAppUrl(isiPesan);
   console.log(API_LOG, "WhatsApp:", urlAman.length, "karakter URL");
   if (urlAman.length > 8000) {
-    console.warn(API_LOG, "URL terlalu panjang — pertimbangkan pesan lebih singkat");
+    console.warn(
+      API_LOG,
+      "URL terlalu panjang — pertimbangkan pesan lebih singkat",
+    );
   }
   return navigasiKeWhatsApp(urlAman);
 }
@@ -607,7 +619,9 @@ async function kirimPesanan() {
     kuotaLolos = true;
   } catch (err) {
     console.error(API_LOG, "kirimPesanan cek kuota gagal:", err);
-    alert(`Gagal memeriksa kuota: ${err.message}\nBuka Console (F12) untuk detail.`);
+    alert(
+      `Gagal memeriksa kuota: ${err.message}\nBuka Console (F12) untuk detail.`,
+    );
     return;
   } finally {
     if (!kuotaLolos && orderBtn) {
@@ -693,7 +707,11 @@ document.addEventListener("DOMContentLoaded", function () {
   apiRequest("debug")
     .then((data) => console.log(API_LOG, "Health check (debug):", data))
     .catch((err) =>
-      console.error(API_LOG, "Health check gagal — cek URL deploy:", err.message),
+      console.error(
+        API_LOG,
+        "Health check gagal — cek URL deploy:",
+        err.message,
+      ),
     );
 
   if (dateSelect && dateWarning) {
@@ -705,7 +723,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
       try {
         const kuota = await cekKuotaTanggal(this.value);
-        if (!kuota.available || kuota.full || kuota.count >= MAX_ORDER_PER_DAY) {
+        if (
+          !kuota.available ||
+          kuota.full ||
+          kuota.count >= MAX_ORDER_PER_DAY
+        ) {
           dateWarning.textContent =
             "⚠️ Kuota tanggal ini sudah penuh. Pilih tanggal lain.";
           dateWarning.style.display = "block";
