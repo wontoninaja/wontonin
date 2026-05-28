@@ -7,6 +7,7 @@ const API_LOG = "[MiniWonton API]";
 const TANGGAL_MULAI_BISNIS = "2026-05-25";
 const TANGGAL_LIBUR = new Set([
   "2026-05-28",
+  "2026-05-30",
   "2026-05-31",
   "2026-06-01",
   "2026-06-07",
