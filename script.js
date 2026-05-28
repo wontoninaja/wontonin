@@ -5,13 +5,26 @@ const API_LOG = "[MiniWonton API]";
 
 /** Aturan tanggal bisnis (dropdown & validasi order web) */
 const TANGGAL_MULAI_BISNIS = "2026-05-25";
-const TANGGAL_LIBUR = new Set(["2026-05-28"]);
+const TANGGAL_LIBUR = new Set([
+  "2026-05-28",
+  "2026-05-31",
+  "2026-06-01",
+  "2026-06-07",
+  "2026-06-14",
+  "2026-06-21",
+  "2026-06-28",
+  "2026-07-05",
+  "2026-07-12",
+  "2026-07-19",
+  "2026-07-26",
+  "2026-08-02",
+  "2026-08-09"
+]);
 const TANGGAL_KUNCI_SOLD_OUT = new Set([
   "2026-05-25",
   "2026-05-26",
   "2026-05-27",
-  "2026-05-29",
-  "2026-06-01"
+  "2026-05-29"
 ]);
 const JENDELA_HARI_TAMPIL = 14;
 
