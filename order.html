@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Order - Mini Wonton</title>
     <link rel="stylesheet" href="style.css" />
-    <!-- Tambahkan di head semua halaman -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="importmap">
       {
         "imports": {
@@ -16,257 +16,264 @@
   </head>
 
   <body>
-    <!-- NAVBAR-->
     <nav class="navbar">
       <div class="nav-container">
         <a href="index.html" class="btn-back">Kembali ke Menu</a>
       </div>
     </nav>
 
-    <!-- HEADER -->
     <div class="header">
       <h1>PESAN SEKARANG!!</h1>
       <p class="tagline">Mini Wonton Lezat • Praktis • Kekinian</p>
     </div>
 
-    <!-- FORM ORDER -->
     <div class="container">
-      <!-- DATA CUSTOMER -->
       <div class="form-box">
-        <input
-          type="text"
-          id="nama"
-          placeholder="Nama (untuk informasi pemesanan)"
-          required
-        />
-        <input
-          type="text"
-          id="wa"
-          placeholder="No WhatsApp (untuk informasi pemesanan)"
-          required
-        />
+        <input type="text" id="nama" placeholder="Nama (untuk informasi pemesanan)" required />
+        <input type="text" id="wa" placeholder="No WhatsApp (untuk informasi pemesanan)" required />
       </div>
+      
       <h2 class="judul produk">Pilih Varian Wontonin</h2>
-      <!-- LIST PRODUCT -->
+      
       <div class="card">
         <!-- GORENG BANGKOK -->
         <div class="item">
           <div class="product-info">
             <img src="images/gambar-saus-bangkok.jpg" class="product-img" />
             <div class="text-details">
-              <span class="nama"
-                >Mini Wonton Goreng <span class="badge"></span
-              ></span>
+              <span class="nama">Mini Wonton Goreng</span>
               <span class="varian">Saus Bangkok</span>
               <span class="harga">Rp8.000</span>
             </div>
           </div>
           <div class="qty">
             <button onclick="kurang('bangkok')">-</button>
-            <input
-              type="number"
-              id="bangkok"
-              value="0"
-              min="0"
-              oninput="hitungTotal()"
-            />
+            <input type="number" id="bangkok" value="0" min="0" oninput="hitungTotal()" />
             <button onclick="tambah('bangkok')">+</button>
           </div>
         </div>
+        
         <!-- GORENG HOT LAVA -->
         <div class="item">
           <div class="product-info">
             <img src="images/gambar-saus-hot-lava.jpg" class="product-img" />
             <div class="text-details">
-              <span class="nama"
-                >Mini Wonton Goreng <span class="badge"></span
-              ></span>
+              <span class="nama">Mini Wonton Goreng</span>
               <span class="varian">Saus Hot Lava</span>
               <span class="harga">Rp8.000</span>
             </div>
           </div>
           <div class="qty">
             <button onclick="kurang('hot-lava')">-</button>
-            <input
-              type="number"
-              id="hot-lava"
-              value="0"
-              min="0"
-              oninput="hitungTotal()"
-            />
+            <input type="number" id="hot-lava" value="0" min="0" oninput="hitungTotal()" />
             <button onclick="tambah('hot-lava')">+</button>
           </div>
         </div>
-        <!-- GORENG KEJU -->
+        
+        <!-- GORENG KEJU (disabled) -->
         <div class="item">
           <div class="product-info">
             <img src="images/gambar-saus-keju.jpg" class="product-img" />
             <div class="text-details">
-              <span class="nama"
-                >Mini Wonton Goreng <span class="badge"></span
-              ></span>
+              <span class="nama">Mini Wonton Goreng</span>
               <span class="varian">🔒***</span>
-              <span class="harga"> </span>
+              <span class="harga"></span>
             </div>
           </div>
           <div class="qty">
-            <button onclick="kurang('keju')" disabled>-</button>
-            <input
-              type="number"
-              id="keju"
-              value="0"
-              min="0"
-              oninput="hitungTotal()"
-              disabled
-            />
-            <button onclick="tambah('keju')" disabled>+</button>
+            <button disabled>-</button>
+            <input type="number" id="keju" value="0" min="0" disabled />
+            <button disabled>+</button>
           </div>
         </div>
+        
         <!-- REBUS BANGKOK -->
         <div class="item">
           <div class="product-info">
             <img src="images/gambar-rebus-bangkok.jpg" class="product-img" />
             <div class="text-details">
-              <span class="nama"
-                >Mini Wonton Rebus <span class="badge"></span
-              ></span>
+              <span class="nama">Mini Wonton Rebus</span>
               <span class="varian">Saus Bangkok</span>
               <span class="harga">Rp7.000</span>
             </div>
           </div>
           <div class="qty">
             <button onclick="kurang('saus-bangkok')">-</button>
-            <input
-              type="number"
-              id="saus-bangkok"
-              value="0"
-              min="0"
-              oninput="hitungTotal()"
-            />
+            <input type="number" id="saus-bangkok" value="0" min="0" oninput="hitungTotal()" />
             <button onclick="tambah('saus-bangkok')">+</button>
           </div>
         </div>
+        
         <!-- REBUS HOT LAVA -->
         <div class="item">
           <div class="product-info">
             <img src="images/gambar-rebus-hot-lava.jpg" class="product-img" />
             <div class="text-details">
-              <span class="nama"
-                >Mini Wonton Rebus <span class="badge"></span
-              ></span>
+              <span class="nama">Mini Wonton Rebus</span>
               <span class="varian">Saus Hot Lava</span>
               <span class="harga">Rp7.000</span>
             </div>
           </div>
           <div class="qty">
             <button onclick="kurang('saus-hot-lava')">-</button>
-            <input
-              type="number"
-              id="saus-hot-lava"
-              value="0"
-              min="0"
-              oninput="hitungTotal()"
-            />
+            <input type="number" id="saus-hot-lava" value="0" min="0" oninput="hitungTotal()" />
             <button onclick="tambah('saus-hot-lava')">+</button>
           </div>
         </div>
+        
         <!-- REBUS CHILI OIL -->
         <div class="item">
           <div class="product-info">
             <img src="images/gambar-chili-oil.jpg" class="product-img" />
             <div class="text-details">
-              <span class="nama"
-                >Mini Wonton Rebus <span class="badge"></span
-              ></span>
+              <span class="nama">Mini Wonton Rebus</span>
               <span class="varian">Chili Oil</span>
               <span class="harga">Rp7.000</span>
             </div>
           </div>
           <div class="qty">
             <button onclick="kurang('chili-oil')">-</button>
-            <input
-              type="number"
-              id="chili-oil"
-              value="0"
-              min="0"
-              oninput="hitungTotal()"
-            />
+            <input type="number" id="chili-oil" value="0" min="0" oninput="hitungTotal()" />
             <button onclick="tambah('chili-oil')">+</button>
           </div>
         </div>
+        
         <!-- KUAH ORIGINAL -->
         <div class="item">
           <div class="product-info">
             <img src="images/gambar-kuah-original.jpg" class="product-img" />
             <div class="text-details">
-              <span class="nama"
-                >Mini Wonton Rebus <span class="badge"></span
-              ></span>
+              <span class="nama">Mini Wonton Rebus</span>
               <span class="varian">Kuah Original</span>
               <span class="harga">Rp10.000</span>
             </div>
           </div>
           <div class="qty">
             <button onclick="kurang('kuah-original')">-</button>
-            <input
-              type="number"
-              id="kuah-original"
-              value="0"
-              min="0"
-              oninput="hitungTotal()"
-            />
+            <input type="number" id="kuah-original" value="0" min="0" oninput="hitungTotal()" />
             <button onclick="tambah('kuah-original')">+</button>
           </div>
         </div>
+        
         <!-- KUAH SEBLAK -->
         <div class="item">
           <div class="product-info">
             <img src="images/gambar-kuah-seblak.jpg" class="product-img" />
             <div class="text-details">
-              <span class="nama"
-                >Mini Wonton Rebus <span class="badge"></span
-              ></span>
+              <span class="nama">Mini Wonton Rebus</span>
               <span class="varian">Kuah Seblak</span>
               <span class="harga">Rp10.000</span>
             </div>
           </div>
           <div class="qty">
             <button onclick="kurang('kuah-seblak')">-</button>
-            <input
-              type="number"
-              id="kuah-seblak"
-              value="0"
-              min="0"
-              oninput="hitungTotal()"
-            />
+            <input type="number" id="kuah-seblak" value="0" min="0" oninput="hitungTotal()" />
             <button onclick="tambah('kuah-seblak')">+</button>
           </div>
         </div>
-        <!-- KUAH KEJU CREAMY -->
+        
+        <!-- KUAH KEJU CREAMY (disabled) -->
         <div class="item">
           <div class="product-info">
             <img src="images/gambar-kuah-keju-creamy.jpg" class="product-img" />
             <div class="text-details">
-              <span class="nama"
-                >Mini Wonton Rebus <span class="badge"></span
-              ></span>
+              <span class="nama">Mini Wonton Rebus</span>
               <span class="varian">🔒***</span>
-              <span class="harga"> </span>
+              <span class="harga"></span>
             </div>
           </div>
           <div class="qty">
-            <button onclick="kurang('kuah-keju-creamy')" disabled>-</button>
-            <input
-              type="number"
-              id="kuah-keju-creamy"
-              value="0"
-              min="0"
-              oninput="hitungTotal()"
-              disabled
-            />
-            <button onclick="tambah('kuah-keju-creamy')" disabled>+</button>
+            <button disabled>-</button>
+            <input type="number" id="kuah-keju-creamy" value="0" min="0" disabled />
+            <button disabled>+</button>
           </div>
         </div>
+        
+        <!-- ADD ON BANGKOK -->
+        <div class="item">
+          <div class="product-info">
+            <img src="images/bangkok.jpg" class="product-img" />
+            <div class="text-details">
+              <span class="nama">Add On Saus</span>
+              <span class="varian">Saus Bangkok</span>
+              <span class="harga">Rp1.500</span>
+            </div>
+          </div>
+          <div class="qty">
+            <button onclick="kurang('sambal-bangkok')">-</button>
+            <input type="number" id="sambal-bangkok" value="0" min="0" oninput="hitungTotal()" />
+            <button onclick="tambah('sambal-bangkok')">+</button>
+          </div>
+        </div>
+        
+        <!-- ADD ON HOT LAVA -->
+        <div class="item">
+          <div class="product-info">
+            <img src="images/hot-lava.jpg" class="product-img" />
+            <div class="text-details">
+              <span class="nama">Add On Saus</span>
+              <span class="varian">Saus Hot Lava</span>
+              <span class="harga">Rp1.500</span>
+            </div>
+          </div>
+          <div class="qty">
+            <button onclick="kurang('lava')">-</button>
+            <input type="number" id="lava" value="0" min="0" oninput="hitungTotal()" />
+            <button onclick="tambah('lava')">+</button>
+          </div>
+        </div>
+        
+        <!-- ADD ON CHILI OIL -->
+        <div class="item">
+          <div class="product-info">
+            <img src="images/chili-oil.jpg" class="product-img" />
+            <div class="text-details">
+              <span class="nama">Add On Saus</span>
+              <span class="varian">Chili Oil</span>
+              <span class="harga">Rp1.500</span>
+            </div>
+          </div>
+          <div class="qty">
+            <button onclick="kurang('chili')">-</button>
+            <input type="number" id="chili" value="0" min="0" oninput="hitungTotal()" />
+            <button onclick="tambah('chili')">+</button>
+          </div>
+        </div>
+        
+        <!-- ADD ON KUAH ORIGINAL -->
+        <div class="item">
+          <div class="product-info">
+            <img src="images/kuah-original.jpg" class="product-img" />
+            <div class="text-details">
+              <span class="nama">Add On Kuah</span>
+              <span class="varian">Kuah Original</span>
+              <span class="harga">Rp2.500</span>
+            </div>
+          </div>
+          <div class="qty">
+            <button onclick="kurang('original')">-</button>
+            <input type="number" id="original" value="0" min="0" oninput="hitungTotal()" />
+            <button onclick="tambah('original')">+</button>
+          </div>
+        </div>
+        
+        <!-- ADD ON KUAH SEBLAK -->
+        <div class="item">
+          <div class="product-info">
+            <img src="images/kuah-seblak.jpg" class="product-img" />
+            <div class="text-details">
+              <span class="nama">Add On Kuah</span>
+              <span class="varian">Kuah Seblak</span>
+              <span class="harga">Rp2.500</span>
+            </div>
+          </div>
+          <div class="qty">
+            <button onclick="kurang('seblak')">-</button>
+            <input type="number" id="seblak" value="0" min="0" oninput="hitungTotal()" />
+            <button onclick="tambah('seblak')">+</button>
+          </div>
+        </div>
+        
         <!-- TOTAL -->
         <div class="total-box">
           Total Bayar
@@ -274,24 +281,9 @@
         </div>
 
         <!-- Pilih Tanggal dan Shift -->
-        <div
-          id="date-section"
-          style="
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            background: #fff0d4;
-            border-radius: 15px;
-            border-left: 4px solid #ff6600;
-          "
-        >
-          <h3 style="color: #d34f21; margin: 0 0 8px 0">
-            📅 Pilih Tanggal & Shift
-          </h3>
-          <select
-            id="delivery-date-select"
-            style="width: 100%; padding: 12px; margin-bottom: 12px"
-          >
+        <div id="date-section" style="display: none; margin-top: 20px; padding: 15px; background: #fff0d4; border-radius: 15px; border-left: 4px solid #ff6600;">
+          <h3 style="color: #d34f21; margin: 0 0 8px 0">📅 Pilih Tanggal & Shift</h3>
+          <select id="delivery-date-select" style="width: 100%; padding: 12px; margin-bottom: 12px">
             <option value="">-- Memuat --</option>
           </select>
           <select id="shift-select" style="width: 100%; padding: 12px">
@@ -299,25 +291,29 @@
             <option value="09.30-10.30">🌅 Pagi (09.30-10.30)</option>
             <option value="13.00-14.00">🌇 Siang (13.00-14.00)</option>
           </select>
-          <div
-            id="date-warning"
-            style="
-              display: none;
-              margin-top: 10px;
-              padding: 8px;
-              background: #ffe0e0;
-              border-radius: 8px;
-              color: #d32f2f;
-            "
-          ></div>
+          <div id="date-warning" style="display: none; margin-top: 10px; padding: 8px; background: #ffe0e0; border-radius: 8px; color: #d32f2f;"></div>
+        </div>
+
+        <!-- FITUR ANTAR KE -->
+        <div id="delivery-location-section" style="display: block; margin-top: 20px; padding: 15px; background: #fff0d4; border-radius: 15px; border-left: 4px solid #ff6600;">
+          <h3 style="color: #d34f21; margin: 0 0 8px 0">📍 Antar Ke</h3>
+          <select id="antarKe" style="width: 100%; padding: 12px">
+            <option value="">-- Pilih Lokasi --</option>
+            <option value="STID Al-Hadid">STID Al-Hadid</option>
+            <option value="Al-Kahfi Sawahan">Al-Kahfi Sawahan</option>
+            <option value="Custom">Custom</option>
+          </select>
+          <div id="boxCustom" style="display: none; margin-top: 10px;">
+            <label for="customAntarKe">Masukkan lokasi custom Anda</label>
+            <input type="text" id="customAntarKe" placeholder="Masukkan lokasi custom Anda" style="width: 100%; padding: 12px; margin-top: 5px;" />
+          </div>
         </div>
 
         <!-- BUTTON -->
-        <button type="button" class="order-btn" id="btn-pesan">
-          Pesan Sekarang
-        </button>
+        <button type="button" class="order-btn" id="btn-pesan">Pesan Sekarang</button>
       </div>
     </div>
+    
     <script src="./script.js"></script>
     <script src="./electric.js"></script>
     <script src="./music.js"></script>
