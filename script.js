@@ -16,18 +16,18 @@ const TANGGAL_KUNCI_SOLD_OUT = new Set([
 const JENDELA_HARI_TAMPIL = 14;
 
 /** Data produk (id, nama, harga) */
-const ORDER_IDS = [
-  "bangkok", "hot-lava", "keju", "saus-bangkok", "saus-hot-lava", "chili-oil",
-  "kuah-original", "kuah-seblak", "kuah-keju-creamy", "sambal-bangkok", "lava",
-  "chili", "original", "seblak"
-];
-const ORDER_NAMES = [
+const MAIN_ORDER_IDS = ["bangkok", "hot-lava", "keju", "saus-bangkok", "saus-hot-lava", "chili-oil", "kuah-original", "kuah-seblak", "kuah-keju-creamy"];
+const MAIN_ORDER_NAMES = [
   "Goreng Saus Bangkok", "Goreng Saus Hot Lava", "Goreng Saus Keju",
   "Rebus Saus Bangkok", "Rebus Saus Hot Lava", "Rebus Chili Oil",
-  "Rebus Kuah Original", "Rebus Kuah Seblak", "Rebus Kuah Keju Creamy",
-  "Sambal Bangkok", "Lava", "Chili Oil", "Kuah Original", "Kuah Seblak"
+  "Rebus Kuah Original", "Rebus Kuah Seblak", "Rebus Kuah Keju Creamy"
 ];
-const ORDER_PRICES = [8000, 8000, 8000, 7000, 7000, 7000, 10000, 10000, 10000, 1500, 1500, 1500, 2500, 2500];
+const MAIN_ORDER_PRICES = [8000, 8000, 8000, 7000, 7000, 7000, 10000, 10000, 10000];
+
+// Data add-on
+const ADDON_IDS = ["sambal-bangkok", "lava", "chili", "original", "seblak"];
+const ADDON_NAMES = ["Sambal Bangkok", "Sambal Hot Lava", "Chili Oil", "Kuah Original", "Kuah Seblak"];
+const ADDON_PRICES = [1500, 1500, 1500, 2500, 2500];
 
 /** Nomor admin */
 const WA_ADMIN = "628132524282";
@@ -151,20 +151,39 @@ async function apiRequest(action, params = {}) {
 
 function buildDetailPesanan() {
   const lines = [];
-  for (let i = 0; i < ORDER_IDS.length; i++) {
-    const qty = parseInt(document.getElementById(ORDER_IDS[i])?.value, 10) || 0;
-    if (qty > 0) lines.push(`Mini Wonton ${ORDER_NAMES[i]} (${qty})`);
+  
+  // Proses produk utama (Mini Wonton)
+  for (let i = 0; i < MAIN_ORDER_IDS.length; i++) {
+    const qty = parseInt(document.getElementById(MAIN_ORDER_IDS[i])?.value, 10) || 0;
+    if (qty > 0) lines.push(`Mini Wonton ${MAIN_ORDER_NAMES[i]} (${qty})`);
   }
+  
+  // Proses add-on
+  for (let i = 0; i < ADDON_IDS.length; i++) {
+    const qty = parseInt(document.getElementById(ADDON_IDS[i])?.value, 10) || 0;
+    if (qty > 0) lines.push(`Add On ${ADDON_NAMES[i]} (${qty})`);
+  }
+  
   return lines.join("\n").trim();
 }
 
 function hitungTotalOrder() {
   let total = 0, totalItem = 0;
-  for (let i = 0; i < ORDER_IDS.length; i++) {
-    const val = parseInt(document.getElementById(ORDER_IDS[i])?.value, 10) || 0;
-    total += val * ORDER_PRICES[i];
+  
+  // Hitung produk utama
+  for (let i = 0; i < MAIN_ORDER_IDS.length; i++) {
+    const val = parseInt(document.getElementById(MAIN_ORDER_IDS[i])?.value, 10) || 0;
+    total += val * MAIN_ORDER_PRICES[i];
     totalItem += val;
   }
+  
+  // Hitung add-on
+  for (let i = 0; i < ADDON_IDS.length; i++) {
+    const val = parseInt(document.getElementById(ADDON_IDS[i])?.value, 10) || 0;
+    total += val * ADDON_PRICES[i];
+    totalItem += val;
+  }
+  
   return { total, totalItem };
 }
 
