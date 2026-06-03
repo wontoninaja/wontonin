@@ -1,12 +1,9 @@
 /**
  * Musik latar — kompatibel Vercel (path case-sensitive, autoplay via interaksi user)
- * Persistent Audio via localStorage (tidak reset saat pindah halaman)
  */
 (function () {
-  const AUDIO_FILENAME = "music.mp3";
+  const AUDIO_FILENAME = "Wontonin_Makin_Enak.mp3";
   const BTN_ID = "btn-music-wontonin";
-  const POS_KEY = "wontonin-audio-position";
-  const PAUSED_KEY = "wontonin-audio-paused";
 
   function resolveAudioSrc() {
     const tag = document.querySelector('script[src*="music.js"]');
@@ -25,15 +22,24 @@
       console.error("[Music] document.body belum ada");
       return;
     }
-    if (document.getElementById(BTN_ID)) return;
+
+    if (document.getElementById(BTN_ID)) {
+      return;
+    }
 
     const audioSrc = resolveAudioSrc();
+
     const btn = document.createElement("button");
     btn.id = BTN_ID;
     btn.type = "button";
     btn.setAttribute("aria-label", "Musik latar");
     btn.innerHTML = "🔇";
-    btn.style.cssText = "position:fixed;bottom:20px;right:20px;width:55px;height:55px;border-radius:50%;background:#ff6600;border:none;color:#fff;font-size:28px;cursor:pointer;z-index:99999;box-shadow:0 2px 10px rgba(0,0,0,0.35);pointer-events:auto;";
+    btn.style.cssText =
+      "position:fixed;bottom:20px;right:20px;width:55px;height:55px;" +
+      "border-radius:50%;background:#ff6600;border:none;color:#fff;" +
+      "font-size:28px;cursor:pointer;z-index:99999;" +
+      "box-shadow:0 2px 10px rgba(0,0,0,0.35);pointer-events:auto;";
+
     document.body.appendChild(btn);
     console.log("[Music] Tombol ditambahkan ke body");
 
@@ -45,30 +51,15 @@
     let isPlaying = false;
     let userInteracted = false;
 
-    // Load audio state from localStorage
-    const savedPosition = localStorage.getItem(POS_KEY);
-    const savedPaused = localStorage.getItem(PAUSED_KEY);
-
-    if (savedPosition) {
-      audio.currentTime = parseFloat(savedPosition);
-      console.log("[Music] Melanjutkan dari posisi:", audio.currentTime, "detik");
-    }
-    if (savedPaused === "false") {
-      // Attempt to play if it was playing before, but respect browser autoplay policies
-      playMusic().catch(() => {});
-    }
-
-    // Save audio state on page unload
-    window.addEventListener("beforeunload", function() {
-      localStorage.setItem(POS_KEY, audio.currentTime.toString());
-      localStorage.setItem(PAUSED_KEY, audio.paused.toString());
-    });
-
     audio.addEventListener("canplaythrough", function () {
       console.log("[Music] File siap:", audioSrc);
     });
+
     audio.addEventListener("error", function () {
-      console.error("[Music] Gagal memuat audio. Pastikan file ada di root deploy:", audioSrc);
+      console.error(
+        "[Music] Gagal memuat audio. Pastikan file ada di root deploy:",
+        audioSrc,
+      );
       btn.style.backgroundColor = "#cc0000";
       btn.innerHTML = "⚠️";
     });
@@ -81,13 +72,16 @@
 
     function playMusic() {
       btn.innerHTML = "⏳";
-      return audio.play().then(function () {
-        setPlaying(true);
-        console.log("[Music] Diputar");
-      }).catch(function (err) {
-        console.warn("[Music] play() ditolak browser:", err.message);
-        setPlaying(false);
-      });
+      return audio
+        .play()
+        .then(function () {
+          setPlaying(true);
+          console.log("[Music] Diputar");
+        })
+        .catch(function (err) {
+          console.warn("[Music] play() ditolak browser:", err.message);
+          setPlaying(false);
+        });
     }
 
     function pauseMusic() {
@@ -97,22 +91,56 @@
 
     function onUserActivate() {
       userInteracted = true;
-      if (!isPlaying) playMusic();
+      if (!isPlaying) {
+        playMusic();
+      }
     }
 
     btn.addEventListener("click", function (e) {
       e.preventDefault();
       e.stopPropagation();
       userInteracted = true;
-      if (isPlaying) pauseMusic();
-      else playMusic();
+      if (isPlaying) {
+        pauseMusic();
+      } else {
+        playMusic();
+      }
     });
 
-    document.addEventListener("pointerdown", function () { if (!userInteracted) onUserActivate(); }, { once: true, passive: true });
-    document.addEventListener("touchstart", function () { if (!userInteracted) onUserActivate(); }, { once: true, passive: true });
-    document.addEventListener("click", function () { if (!userInteracted) onUserActivate(); }, { once: true, passive: true });
+    document.addEventListener(
+      "pointerdown",
+      function () {
+        if (!userInteracted) {
+          onUserActivate();
+        }
+      },
+      { once: true, passive: true },
+    );
+
+    document.addEventListener(
+      "touchstart",
+      function () {
+        if (!userInteracted) {
+          onUserActivate();
+        }
+      },
+      { once: true, passive: true },
+    );
+
+    document.addEventListener(
+      "click",
+      function () {
+        if (!userInteracted) {
+          onUserActivate();
+        }
+      },
+      { once: true, passive: true },
+    );
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initMusicPlayer);
-  else initMusicPlayer();
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initMusicPlayer);
+  } else {
+    initMusicPlayer();
+  }
 })();
