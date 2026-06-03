@@ -1,4 +1,4 @@
-const API = "https://script.google.com/macros/s/AKfycbx4lQiBCAofTFXOfbzkdTJtvEBBFo-Mk19GC1tbPdf_uXexk1o8rpmwR5Ax32vib2BXCQ/exec";
+const API = "https://script.google.com/macros/s/AKfycbzUGNUzl_-oalCHrvkl4IOawJO61o84eU79fwnAyVv9kycPDvq4Mwd4OLI6yPqir2yB/exec";
 const MAX_ORDER_PER_DAY = 70;
 const API_LOG = "[MiniWonton API]";
 
