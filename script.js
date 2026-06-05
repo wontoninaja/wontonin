@@ -258,10 +258,21 @@ async function loadAvailableDates() {
     }
     dateSelect.options.length = 0;
     dateSelect.add(new Option("-- Pilih tanggal pengambilan --", ""));
+    const now = new Date();
+    const currentHour = now.getHours();
+    const tomorrow = new Date(now);
+    tomorrow.setDate(now.getDate() + 1);
+    const tomorrowYMD = formatLocalYMD(tomorrow);
+
     dates.forEach(({ date, count }) => {
       const dateYMD = normalizeDateYMD(date);
       if (!dateYMD || !bolehTampilDiDropdown(dateYMD)) return;
-      const { label, disabled } = getOpsiLabelTanggal(dateYMD, count);
+      let { label, disabled } = getOpsiLabelTanggal(dateYMD, count);
+      // Cut-Off Close Order logic
+      if (dateYMD === tomorrowYMD && currentHour >= 21) {
+        label = `${dateYMD} [CLOSED / SOLD OUT]`;
+        disabled = true;
+      }
       const opt = new Option(label, dateYMD);
       if (disabled) opt.disabled = true;
       dateSelect.add(opt);
