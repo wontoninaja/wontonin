@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Order - Mini Wonton</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="importmap">
@@ -283,9 +285,7 @@
         <!-- Pilih Tanggal dan Shift -->
         <div id="date-section" style="display: none; margin-top: 20px; padding: 15px; background: #fff0d4; border-radius: 15px; border-left: 4px solid #ff6600;">
           <h3 style="color: #d34f21; margin: 0 0 8px 0">📅 Pilih Tanggal & Shift</h3>
-          <select id="delivery-date-select" style="width: 100%; padding: 12px; margin-bottom: 12px">
-            <option value="">-- Memuat --</option>
-          </select>
+          <input type="text" id="delivery-date-select" placeholder="Pilih Tanggal" style="width: 100%; padding: 12px; margin-bottom: 12px" />
           <select id="shift-select" style="width: 100%; padding: 12px">
             <option value="">-- Pilih shift --</option>
             <option value="09.30-10.30">🌅 Pagi (09.30-10.30)</option>
@@ -314,6 +314,7 @@
       </div>
     </div>
     
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="./script.js"></script>
     <script src="./electric.js"></script>
     <script src="./music.js"></script>
