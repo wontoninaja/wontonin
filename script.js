@@ -194,13 +194,9 @@ function hitungTotal() {
   if (dateSection) {
     if (totalItem > 0 || total > 0) {
       dateSection.style.display = "block";
-      if (!window.datesLoaded) {
-        loadAvailableDates();
-        window.datesLoaded = true;
-      }
+      dateSection.style.display = "block";
     } else {
       dateSection.style.display = "none";
-      window.datesLoaded = false;
     }
   }
 }
@@ -240,24 +236,20 @@ async function cekKuotaTanggal(tanggal) {
   }
 }
 
-async function loadAvailableDates() {
-  const dateSelect = document.getElementById("delivery-date-select");
-  if (!dateSelect) return;
-  dateSelect.options.length = 0;
-  dateSelect.add(new Option("⏳ Memuat tanggal...", ""));
-  dateSelect.disabled = true;
+async function loadAvailableDatesData() {
+  let disabledDates = [];
+  let noDatesAvailable = false;
   try {
     const json = await apiRequest("getAvailableDates");
     let dates = [];
     if (Array.isArray(json)) dates = json;
     else if (json && Array.isArray(json.data)) dates = json.data;
+
     if (dates.length === 0) {
-      dateSelect.add(new Option("-- Tidak ada tanggal tersedia --", ""));
-      dateSelect.disabled = true;
-      return;
+      noDatesAvailable = true;
+      return { disabledDates, noDatesAvailable };
     }
-    dateSelect.options.length = 0;
-    dateSelect.add(new Option("-- Pilih tanggal pengambilan --", ""));
+
     const now = new Date();
     const currentHour = now.getHours();
     const tomorrow = new Date(now);
@@ -273,17 +265,15 @@ async function loadAvailableDates() {
         label = `${dateYMD} [CLOSED / SOLD OUT]`;
         disabled = true;
       }
-      const opt = new Option(label, dateYMD);
-      if (disabled) opt.disabled = true;
-      dateSelect.add(opt);
+      if (disabled) {
+        disabledDates.push(dateYMD);
+      }
     });
-    dateSelect.disabled = false;
   } catch (err) {
-    console.error(API_LOG, "loadAvailableDates gagal:", err);
-    dateSelect.add(new Option(`-- Gagal memuat: ${err.message} --`, ""));
-    dateSelect.disabled = true;
-    window.datesLoaded = false;
+    console.error(API_LOG, "loadAvailableDatesData gagal:", err);
+    noDatesAvailable = true;
   }
+  return { disabledDates, noDatesAvailable };
 }
 
 function buildWhatsAppUrl(isiPesan) {
@@ -479,31 +469,59 @@ function initAntarKeListener() {
 document.addEventListener("DOMContentLoaded", function () {
   getAffiliate();
   initAntarKeListener();
-  
+
   const btnPesan = document.getElementById("btn-pesan");
   if (btnPesan) btnPesan.addEventListener("click", (e) => { e.preventDefault(); kirimPesanan(); });
-  
+
   const dateSelect = document.getElementById("delivery-date-select");
   const dateWarning = document.getElementById("date-warning");
-  
-  if (dateSelect && dateWarning) {
-    dateSelect.addEventListener("change", async function () {
-      if (!this.value) { dateWarning.style.display = "none"; return; }
-      try {
-        const kuota = await cekKuotaTanggal(this.value);
-        if (!kuota.available || kuota.full || kuota.count >= MAX_ORDER_PER_DAY) {
-          dateWarning.textContent = "⚠️ Kuota tanggal ini sudah penuh. Pilih tanggal lain.";
-          dateWarning.style.display = "block";
-        } else {
-          dateWarning.style.display = "none";
-        }
-      } catch (err) {
-        console.error(API_LOG, "change tanggal gagal:", err);
-        dateWarning.textContent = `⚠️ Gagal cek kuota: ${err.message}`;
-        dateWarning.style.display = "block";
+
+  // Initial check for date section visibility
+  const { totalItem } = hitungTotalOrder();
+  const dateSection = document.getElementById("date-section");
+  if (dateSection) {
+    if (totalItem > 0) {
+      dateSection.style.display = "block";
+    } else {
+      dateSection.style.display = "none";
+    }
+  }
+
+  // Load available dates and then initialize Flatpickr
+  loadAvailableDatesData().then(({ disabledDates, noDatesAvailable }) => {
+    if (noDatesAvailable) {
+      if (dateSelect) {
+        dateSelect.value = "-- Tidak ada tanggal tersedia --";
+        dateSelect.disabled = true;
+      }
+      return;
+    }
+
+    flatpickr("#delivery-date-select", {
+      dateFormat: "Y-m-d",
+      minDate: "today",
+      allowInput: true,
+      clickOpens: true,
+      disable: disabledDates, // Use the dynamically determined disabled dates
+      onChange: function(selectedDates, dateStr, instance) {
+        if (!dateStr) { dateWarning.style.display = "none"; return; }
+        cekKuotaTanggal(dateStr)
+          .then(kuota => {
+            if (!kuota.available || kuota.full || kuota.count >= MAX_ORDER_PER_DAY) {
+              dateWarning.textContent = "⚠️ Kuota tanggal ini sudah penuh. Pilih tanggal lain.";
+              dateWarning.style.display = "block";
+            } else {
+              dateWarning.style.display = "none";
+            }
+          })
+          .catch(err => {
+            console.error(API_LOG, "change tanggal gagal:", err);
+            dateWarning.textContent = `⚠️ Gagal cek kuota: ${err.message}`;
+            dateWarning.style.display = "block";
+          });
       }
     });
-  }
+  });
 
   apiRequest("debug").then((data) => console.log(API_LOG, "Health check:", data)).catch((err) => console.error(API_LOG, "Health check gagal:", err.message));
 });
