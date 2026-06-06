@@ -252,6 +252,7 @@ async function loadAvailableDatesData() {
 
     const now = new Date();
     const currentHour = now.getHours();
+    const todayYMD = formatLocalYMD(now); // Today's date
     const tomorrow = new Date(now);
     tomorrow.setDate(now.getDate() + 1);
     const tomorrowYMD = formatLocalYMD(tomorrow);
@@ -259,7 +260,12 @@ async function loadAvailableDatesData() {
     dates.forEach(({ date, count }) => {
       const dateYMD = normalizeDateYMD(date);
       if (!dateYMD || !bolehTampilDiDropdown(dateYMD)) return;
+
       let { label, disabled } = getOpsiLabelTanggal(dateYMD, count);
+      // Disable today's date
+      if (dateYMD === todayYMD) {
+        disabled = true;
+      }
       // Cut-Off Close Order logic
       if (dateYMD === tomorrowYMD && currentHour >= 21) {
         label = `${dateYMD} [CLOSED / SOLD OUT]`;
