@@ -503,9 +503,17 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
+    const nowUser = new Date();
+    const currentHourUser = nowUser.getHours();
+    let minimalTanggalPesan = new Date();
+    minimalTanggalPesan.setDate(nowUser.getDate() + 1);
+
+    if (currentHourUser >= 21) {
+      minimalTanggalPesan.setDate(nowUser.getDate() + 2);
+    
     flatpickr("#delivery-date-select", {
       dateFormat: "Y-m-d",
-      minDate: new Date().fp_incr(1),
+      minDate: minimalTanggalPesan,
       allowInput: false,
       clickOpens: true,
       disable: disabledDates, // Use the dynamically determined disabled dates
