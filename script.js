@@ -505,8 +505,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     flatpickr("#delivery-date-select", {
       dateFormat: "Y-m-d",
-      minDate: "today",
-      allowInput: true,
+      minDate: new Date().fp_incr(1),
+      allowInput: false,
       clickOpens: true,
       disable: disabledDates, // Use the dynamically determined disabled dates
       onChange: function(selectedDates, dateStr, instance) {
