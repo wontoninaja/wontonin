@@ -510,6 +510,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (currentHourUser >= 21) {
       minimalTanggalPesan.setDate(nowUser.getDate() + 2);
+    }
     
     flatpickr("#delivery-date-select", {
       dateFormat: "Y-m-d",
