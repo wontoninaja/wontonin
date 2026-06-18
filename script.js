@@ -16,13 +16,14 @@ const TANGGAL_KUNCI_SOLD_OUT = new Set([
 const JENDELA_HARI_TAMPIL = 14;
 
 /** Data produk (id, nama, harga) */
-const MAIN_ORDER_IDS = ["bangkok", "hot-lava", "keju", "saus-bangkok", "saus-hot-lava", "chili-oil", "kuah-original", "kuah-seblak", "kuah-keju-creamy"];
+const MAIN_ORDER_IDS = ["bangkok", "hot-lava", "keju", "saus-bangkok", "saus-hot-lava", "chili-oil", "kuah-original", "kuah-seblak", "kuah-keju-creamy", "goreng-frozen", "rebus-frozen"];
 const MAIN_ORDER_NAMES = [
   "Goreng Saus Bangkok", "Goreng Saus Hot Lava", "Goreng Saus Keju",
   "Rebus Saus Bangkok", "Rebus Saus Hot Lava", "Rebus Chili Oil",
-  "Rebus Kuah Original", "Rebus Kuah Seblak", "Rebus Kuah Keju Creamy"
+  "Rebus Kuah Original", "Rebus Kuah Seblak", "Rebus Kuah Keju Creamy",
+  "Frozen Goreng"
 ];
-const MAIN_ORDER_PRICES = [8000, 8000, 8000, 7000, 7000, 7000, 10000, 10000, 10000];
+const MAIN_ORDER_PRICES = [8000, 8000, 8000, 7000, 7000, 7000, 10000, 10000, 10000, 30000, 25000];
 
 // Data add-on
 const ADDON_IDS = ["sambal-bangkok", "lava", "chili", "original", "seblak"];

@@ -190,6 +190,40 @@
             <button disabled>+</button>
           </div>
         </div>
+
+        <!-- FROZEN GORENG -->
+         <div class="item">
+          <div class="product-info">
+            <img src="images/gambar-frozen-goreng.jpg" class="product-img" />
+            <div class="text-details">
+              <span class="nama">Mini Wonton Frozen</span>
+              <span class="varian">Goreng</span>
+              <span class="harga">Rp30.000</span>
+            </div>
+          </div>
+          <div class="qty">
+            <button onclick="kurang('goreng-frozen')">-</button>
+            <input type="number" id="goreng-frozen" value="0" min="0" oninput="hitungTotal()" />
+            <button onclick="tambah('goreng-frozen')">+</button>
+          </div>
+         </div>
+
+        <!-- FROZEN REBUS -->
+         <div class="item">
+          <div class="product-info">
+            <img src="images/gambar-kuah-keju-creamy.jpg" class="product-img" />
+            <div class="text-details">
+              <span class="nama">Mini Wonton Frozen</span>
+              <span class="varian">🔒***</span>
+              <span class="harga"></span>
+            </div>
+          </div>
+          <div class="qty">
+            <button disabled>-</button>
+            <input type="number" id="rebus-frozen" value="0" min="0" disabled />
+            <button disabled>+</button>
+          </div>
+         </div>
         
         <!-- ADD ON BANGKOK -->
         <div class="item">
@@ -288,7 +322,7 @@
           <input type="text" id="delivery-date-select" placeholder="Pilih Tanggal" style="width: 100%; padding: 12px; margin-bottom: 12px" />
           <select id="shift-select" style="width: 100%; padding: 12px">
             <option value="">-- Pilih shift --</option>
-            <option value="10.00-13.00">🌅 Pagi (10.00-13.00)</option>
+            <option value="13.00-16.00">🌅 Siang (13.00-16.00)</option>
           </select>
           <div id="date-warning" style="display: none; margin-top: 10px; padding: 8px; background: #ffe0e0; border-radius: 8px; color: #d32f2f;"></div>
         </div>
