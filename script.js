@@ -21,7 +21,7 @@ const MAIN_ORDER_NAMES = [
   "Goreng Saus Bangkok", "Goreng Saus Hot Lava", "Goreng Saus Keju",
   "Rebus Saus Bangkok", "Rebus Saus Hot Lava", "Rebus Chili Oil",
   "Rebus Kuah Original", "Rebus Kuah Seblak", "Rebus Kuah Keju Creamy",
-  "Frozen Goreng"
+  "Goreng Frozen", "Rebus Frozen",
 ];
 const MAIN_ORDER_PRICES = [8000, 8000, 8000, 7000, 7000, 7000, 10000, 10000, 10000, 30000, 25000];
 
