@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order - Mini Wonton</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="btn-back">Kembali ke Menu</a>
+      </div>
+    </nav>
+
+    <div class="header">
+      <h1>PESAN SEKARANG!!</h1>
+      <p class="tagline">Pilihan Saus yang Lezat, Kekinian, dan Praktis yang siap melengkapi rasa apa saja</p>
+    </div>
+
+    <div class="container">
+      <div class="form-box">
+        <input type="text" id="nama" placeholder="Nama (untuk informasi pemesanan)" required />
+        <input type="text" id="wa" placeholder="No WhatsApp (untuk informasi pemesanan)" required />
+      </div>
+      
+      <h2 class="judul produk">Pilih Varian Wontonin</h2>
+      
+      <div class="card">
+        <!-- ADD ON BANGKOK -->
+        <div class="item">
+          <div class="product-info">
+            <img src="images/bangkok.jpg" class="product-img" />
+            <div class="text-details">
+              <span class="nama">Add On Saus</span>
+              <span class="varian">Saus Bangkok</span>
+              <span class="harga">Rp1.500</span>
+            </div>
+          </div>
+          <div class="qty">
+            <button onclick="kurang('sambal-bangkok')">-</button>
+            <input type="number" id="sambal-bangkok" value="0" min="0" oninput="hitungTotal()" />
+            <button onclick="tambah('sambal-bangkok')">+</button>
+          </div>
+        </div>
+        
+        <!-- ADD ON HOT LAVA -->
+        <div class="item">
+          <div class="product-info">
+            <img src="images/hot-lava.jpg" class="product-img" />
+            <div class="text-details">
+              <span class="nama">Add On Saus</span>
+              <span class="varian">Saus Hot Lava</span>
+              <span class="harga">Rp1.500</span>
+            </div>
+          </div>
+          <div class="qty">
+            <button onclick="kurang('lava')">-</button>
+            <input type="number" id="lava" value="0" min="0" oninput="hitungTotal()" />
+            <button onclick="tambah('lava')">+</button>
+          </div>
+        </div>
+        
+        <!-- ADD ON CHILI OIL -->
+        <div class="item">
+          <div class="product-info">
+            <img src="images/chili-oil.jpg" class="product-img" />
+            <div class="text-details">
+              <span class="nama">Add On Saus</span>
+              <span class="varian">Chili Oil</span>
+              <span class="harga">Rp1.500</span>
+            </div>
+          </div>
+          <div class="qty">
+            <button onclick="kurang('chili')">-</button>
+            <input type="number" id="chili" value="0" min="0" oninput="hitungTotal()" />
+            <button onclick="tambah('chili')">+</button>
+          </div>
+        </div>
+        
+        <!-- ADD ON KUAH ORIGINAL -->
+        <div class="item">
+          <div class="product-info">
+            <img src="images/kuah-original.jpg" class="product-img" />
+            <div class="text-details">
+              <span class="nama">Add On Kuah</span>
+              <span class="varian">Kuah Original</span>
+              <span class="harga">Rp2.500</span>
+            </div>
+          </div>
+          <div class="qty">
+            <button onclick="kurang('original')">-</button>
+            <input type="number" id="original" value="0" min="0" oninput="hitungTotal()" />
+            <button onclick="tambah('original')">+</button>
+          </div>
+        </div>
+        
+        <!-- ADD ON KUAH SEBLAK -->
+        <div class="item">
+          <div class="product-info">
+            <img src="images/kuah-seblak.jpg" class="product-img" />
+            <div class="text-details">
+              <span class="nama">Add On Kuah</span>
+              <span class="varian">Kuah Seblak</span>
+              <span class="harga">Rp2.500</span>
+            </div>
+          </div>
+          <div class="qty">
+            <button onclick="kurang('seblak')">-</button>
+            <input type="number" id="seblak" value="0" min="0" oninput="hitungTotal()" />
+            <button onclick="tambah('seblak')">+</button>
+          </div>
+        </div>
+        
+        <!-- TOTAL -->
+        <div class="total-box">
+          Total Bayar
+          <b> Rp <span id="total">0</span> </b>
+        </div>
+
+        <!-- Pilih Tanggal dan Shift -->
+        <div id="date-section" style="display: none; margin-top: 20px; padding: 15px; background: #fff0d4; border-radius: 15px; border-left: 4px solid #ff6600;">
+          <h3 style="color: #d34f21; margin: 0 0 8px 0">📅 Pilih Tanggal & Shift</h3>
+          <input type="text" id="delivery-date-select" placeholder="Pilih Tanggal" style="width: 100%; padding: 12px; margin-bottom: 12px" />
+          <select id="shift-select" style="width: 100%; padding: 12px">
+            <option value="">-- Pilih shift --</option>
+            <option value="13.00-16.00">🌅 Siang (13.00-16.00)</option>
+          </select>
+          <div id="date-warning" style="display: none; margin-top: 10px; padding: 8px; background: #ffe0e0; border-radius: 8px; color: #d32f2f;"></div>
+        </div>
+
+        <!-- FITUR ANTAR KE -->
+        <div id="delivery-location-section" style="display: block; margin-top: 20px; padding: 15px; background: #fff0d4; border-radius: 15px; border-left: 4px solid #ff6600;">
+          <h3 style="color: #d34f21; margin: 0 0 8px 0">📍 Antar Ke</h3>
+          <select id="antarKe" style="width: 100%; padding: 12px">
+            <option value="">-- Pilih Lokasi --</option>
+            <option value="STID Al-Hadid">STID Al-Hadid</option>
+            <option value="Al-Kahfi Sawahan">Al-Kahfi Sawahan</option>
+            <option value="Custom">Custom</option>
+          </select>
+          <div id="boxCustom" style="display: none; margin-top: 10px;">
+            <label for="customAntarKe">Masukkan lokasi custom Anda</label>
+            <input type="text" id="customAntarKe" placeholder="Masukkan lokasi custom Anda" style="width: 100%; padding: 12px; margin-top: 5px;" />
+          </div>
+        </div>
+
+        <!-- BUTTON -->
+        <button type="button" class="order-btn" id="btn-pesan">Pesan Sekarang</button>
+      </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="./script.js"></script>
+    <script src="./electric.js"></script>
+    <script src="./music.js"></script>
+  </body>
+</html>

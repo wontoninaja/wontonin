@@ -16,14 +16,29 @@ const TANGGAL_KUNCI_SOLD_OUT = new Set([
 const JENDELA_HARI_TAMPIL = 14;
 
 /** Data produk (id, nama, harga) */
-const MAIN_ORDER_IDS = ["bangkok", "hot-lava", "keju", "saus-bangkok", "saus-hot-lava", "chili-oil", "kuah-original", "kuah-seblak", "kuah-keju-creamy", "goreng-frozen", "rebus-frozen"];
+const MAIN_ORDER_IDS = [
+  "bangkok", "hot-lava", "keju", 
+  "saus-bangkok", "saus-hot-lava", "chili-oil",
+  "goreng-kuah-original", "rebus-kuah-original", "mix-kuah-original", 
+  "goreng-kuah-seblak", "rebus-kuah-seblak", "mix-kuah-seblak",
+  "goreng-kuah-keju-creamy", "rebus-kuah-keju-creamy", "mix-kuah-keju-creamy",
+  "goreng-frozen", "rebus-frozen-bangkok", "rebus-frozen-hot-lava", "rebus-frozen-chili-oil"
+];
 const MAIN_ORDER_NAMES = [
   "Goreng Saus Bangkok", "Goreng Saus Hot Lava", "Goreng Saus Keju",
   "Rebus Saus Bangkok", "Rebus Saus Hot Lava", "Rebus Chili Oil",
-  "Rebus Kuah Original", "Rebus Kuah Seblak", "Rebus Kuah Keju Creamy",
-  "Goreng Frozen", "Rebus Frozen",
+  "Goreng Kuah Original", "Rebus Kuah Original", "Mix Kuah Original",
+  "Goreng Kuah Seblak", "Rebus Kuah Seblak", "Mix Kuah Seblak",
+  "Goreng Kuah Keju Creamy", "Rebus Kuah Keju Creamy", "Mix Kuah Keju Creamy",
+  "Goreng Frozen", "Rebus Frozen Bangkok", "Rebus Frozen Hot Lava", "Rebus Frozen Chili Oil"
 ];
-const MAIN_ORDER_PRICES = [8000, 8000, 8000, 7000, 7000, 7000, 10000, 10000, 10000, 30000, 25000];
+const MAIN_ORDER_PRICES = [
+  8000, 8000, 8000, 
+  7000, 7000, 7000, 
+  10000, 10000, 10000, 
+  10000, 10000, 10000,
+  11000, 11000, 11000,
+  30000, 30000, 30000, 30000];
 
 // Data add-on
 const ADDON_IDS = ["sambal-bangkok", "lava", "chili", "original", "seblak"];
