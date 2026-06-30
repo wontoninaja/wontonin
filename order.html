@@ -29,11 +29,14 @@
       <p class="tagline">Mini Wonton Lezat, Kekinian, dan Praktis yang siap santap kapan saja</p>
     </div>
 
+    <div class="product-nav">
+      <a href="order.html" class="product-nav-link is-active">Ready To Eat</a>
+      <a href="pesan_rtc.html" class="product-nav-link">Ready To Cook</a>
+      <a href="addon.html" class="product-nav-link">Add On</a>
+    </div>
+
     <div class="container">
-      <div class="form-box">
-        <input type="text" id="nama" placeholder="Nama (untuk informasi pemesanan)" required />
-        <input type="text" id="wa" placeholder="No WhatsApp (untuk informasi pemesanan)" required />
-      </div>
+      
       
       <h2 class="judul produk">Pilih Varian Wontonin</h2>
       
@@ -49,9 +52,9 @@
             </div>
           </div>
           <div class="qty">
-            <button onclick="kurang('bangkok')">-</button>
-            <input type="number" id="bangkok" value="0" min="0" oninput="hitungTotal()" />
-            <button onclick="tambah('bangkok')">+</button>
+            <button class="qty-minus">-</button>
+            <input type="number" id="bangkok" class="product-qty" value="0" min="0" />
+            <button class="qty-plus">+</button>
           </div>
         </div>
         
@@ -66,9 +69,9 @@
             </div>
           </div>
           <div class="qty">
-            <button onclick="kurang('hot-lava')">-</button>
-            <input type="number" id="hot-lava" value="0" min="0" oninput="hitungTotal()" />
-            <button onclick="tambah('hot-lava')">+</button>
+            <button class="qty-minus">-</button>
+            <input type="number" id="hot-lava" class="product-qty" value="0" min="0" />
+            <button class="qty-plus">+</button>
           </div>
         </div>
         
@@ -83,9 +86,9 @@
             </div>
           </div>
           <div class="qty">
-            <button disabled>-</button>
-            <input type="number" id="keju" value="0" min="0" disabled />
-            <button disabled>+</button>
+            <button class="qty-minus" disabled>-</button>
+            <input type="number" id="keju" class="product-qty" value="0" min="0" disabled />
+            <button class="qty-plus" disabled>+</button>
           </div>
         </div>
         
@@ -100,9 +103,9 @@
             </div>
           </div>
           <div class="qty">
-            <button onclick="kurang('saus-bangkok')">-</button>
-            <input type="number" id="saus-bangkok" value="0" min="0" oninput="hitungTotal()" />
-            <button onclick="tambah('saus-bangkok')">+</button>
+            <button class="qty-minus">-</button>
+            <input type="number" id="saus-bangkok" class="product-qty" value="0" min="0" />
+            <button class="qty-plus">+</button>
           </div>
         </div>
         
@@ -134,9 +137,9 @@
             </div>
           </div>
           <div class="qty">
-            <button onclick="kurang('chili-oil')">-</button>
-            <input type="number" id="chili-oil" value="0" min="0" oninput="hitungTotal()" />
-            <button onclick="tambah('chili-oil')">+</button>
+            <button class="qty-minus">-</button>
+            <input type="number" id="chili-oil" class="product-qty" value="0" min="0" />
+            <button class="qty-plus">+</button>
           </div>
         </div>
         
@@ -151,9 +154,9 @@
             </div>
           </div>
           <div class="qty">
-            <button onclick="kurang('goreng-kuah-original')">-</button>
-            <input type="number" id="goreng-kuah-original" value="0" min="0" oninput="hitungTotal()" />
-            <button onclick="tambah('goreng-kuah-original')">+</button>
+            <button class="qty-minus">-</button>
+            <input type="number" id="goreng-kuah-original" class="product-qty" value="0" min="0" />
+            <button class="qty-plus">+</button>
           </div>
         </div>
 
@@ -167,9 +170,9 @@
             </div>
           </div>
           <div class="qty">
-            <button onclick="kurang('rebus-kuah-original')">-</button>
-            <input type="number" id="rebus-kuah-original" value="0" min="0" oninput="hitungTotal()" />
-            <button onclick="tambah('rebus-kuah-original')">+</button>
+            <button class="qty-minus">-</button>
+            <input type="number" id="rebus-kuah-original" class="product-qty" value="0" min="0" />
+            <button class="qty-plus">+</button>
           </div>
         </div>
 
@@ -183,9 +186,9 @@
             </div>
           </div>
           <div class="qty">
-            <button onclick="kurang('mix-kuah-original')">-</button>
-            <input type="number" id="mix-kuah-original" value="0" min="0" oninput="hitungTotal()" />
-            <button onclick="tambah('mix-kuah-original')">+</button>
+            <button class="qty-minus">-</button>
+            <input type="number" id="mix-kuah-original" class="product-qty" value="0" min="0" />
+            <button class="qty-plus">+</button>
           </div>
         </div>
         
@@ -200,9 +203,9 @@
             </div>
           </div>
           <div class="qty">
-            <button onclick="kurang('goreng-kuah-seblak')">-</button>
-            <input type="number" id="goreng-kuah-seblak" value="0" min="0" oninput="hitungTotal()" />
-            <button onclick="tambah('goreng-kuah-seblak')">+</button>
+            <button class="qty-minus">-</button>
+            <input type="number" id="goreng-kuah-seblak" class="product-qty" value="0" min="0" />
+            <button class="qty-plus">+</button>
           </div>
         </div>
 
@@ -217,9 +220,9 @@
             </div>
           </div>
           <div class="qty">
-            <button onclick="kurang('rebus-kuah-seblak')">-</button>
-            <input type="number" id="rebus-kuah-seblak" value="0" min="0" oninput="hitungTotal()" />
-            <button onclick="tambah('rebus-kuah-seblak')">+</button>
+            <button class="qty-minus">-</button>
+            <input type="number" id="rebus-kuah-seblak" class="product-qty" value="0" min="0" />
+            <button class="qty-plus">+</button>
           </div>
         </div>
         
@@ -234,9 +237,9 @@
             </div>
           </div>
           <div class="qty">
-            <button onclick="kurang('mix-kuah-seblak')">-</button>
-            <input type="number" id="mix-kuah-seblak" value="0" min="0" oninput="hitungTotal()" />
-            <button onclick="tambah('mix-kuah-seblak')">+</button>
+            <button class="qty-minus">-</button>
+            <input type="number" id="mix-kuah-seblak" class="product-qty" value="0" min="0" />
+            <button class="qty-plus">+</button>
           </div>
         </div>
 
@@ -251,9 +254,9 @@
             </div>
           </div>
           <div class="qty">
-            <button onclick="kurang('goreng-kuah-keju-creamy')">-</button>
-            <input type="number" id="goreng-kuah-keju-creamy" value="0" min="0" oninput="hitungTotal()" />
-            <button onclick="tambah('goreng-kuah-keju-creamy')">+</button>
+            <button class="qty-minus">-</button>
+            <input type="number" id="goreng-kuah-keju-creamy" class="product-qty" value="0" min="0" />
+            <button class="qty-plus">+</button>
           </div>
         </div>
 
@@ -268,9 +271,9 @@
             </div>
           </div>
           <div class="qty">
-            <button onclick="kurang('rebus-kuah-keju-creamy')">-</button>
-            <input type="number" id="rebus-kuah-keju-creamy" value="0" min="0" oninput="hitungTotal()" />
-            <button onclick="tambah('rebus-kuah-keju-creamy')">+</button>
+            <button class="qty-minus">-</button>
+            <input type="number" id="rebus-kuah-keju-creamy" class="product-qty" value="0" min="0" />
+            <button class="qty-plus">+</button>
           </div>
         </div>
 
@@ -285,9 +288,9 @@
             </div>
           </div>
           <div class="qty">
-            <button onclick="kurang('mix-kuah-keju-creamy')">-</button>
-            <input type="number" id="mix-kuah-keju-creamy" value="0" min="0" oninput="hitungTotal()" />
-            <button onclick="tambah('mix-kuah-keju-creamy')">+</button>
+            <button class="qty-minus">-</button>
+            <input type="number" id="mix-kuah-keju-creamy" class="product-qty" value="0" min="0" />
+            <button class="qty-plus">+</button>
           </div>
         </div>
         
@@ -297,36 +300,16 @@
           <b> Rp <span id="total">0</span> </b>
         </div>
 
-        <!-- Pilih Tanggal dan Shift -->
-        <div id="date-section" style="display: none; margin-top: 20px; padding: 15px; background: #fff0d4; border-radius: 15px; border-left: 4px solid #ff6600;">
-          <h3 style="color: #d34f21; margin: 0 0 8px 0">📅 Pilih Tanggal & Shift</h3>
-          <input type="text" id="delivery-date-select" placeholder="Pilih Tanggal" style="width: 100%; padding: 12px; margin-bottom: 12px" />
-          <select id="shift-select" style="width: 100%; padding: 12px">
-            <option value="">-- Pilih shift --</option>
-            <option value="13.00-16.00">🌅 Siang (13.00-16.00)</option>
-          </select>
-          <div id="date-warning" style="display: none; margin-top: 10px; padding: 8px; background: #ffe0e0; border-radius: 8px; color: #d32f2f;"></div>
-        </div>
-
-        <!-- FITUR ANTAR KE -->
-        <div id="delivery-location-section" style="display: block; margin-top: 20px; padding: 15px; background: #fff0d4; border-radius: 15px; border-left: 4px solid #ff6600;">
-          <h3 style="color: #d34f21; margin: 0 0 8px 0">📍 Antar Ke</h3>
-          <select id="antarKe" style="width: 100%; padding: 12px">
-            <option value="">-- Pilih Lokasi --</option>
-            <option value="STID Al-Hadid">STID Al-Hadid</option>
-            <option value="Al-Kahfi Sawahan">Al-Kahfi Sawahan</option>
-            <option value="Custom">Custom</option>
-          </select>
-          <div id="boxCustom" style="display: none; margin-top: 10px;">
-            <label for="customAntarKe">Masukkan lokasi custom Anda</label>
-            <input type="text" id="customAntarKe" placeholder="Masukkan lokasi custom Anda" style="width: 100%; padding: 12px; margin-top: 5px;" />
-          </div>
-        </div>
-
         <!-- BUTTON -->
-        <button type="button" class="order-btn" id="btn-pesan">Pesan Sekarang</button>
+        <button type="button" class="order-btn" id="btn-add-to-cart">Tambah ke Keranjang</button>
       </div>
     </div>
+
+    <!-- Floating Cart -->
+    <a href="cart.html" class="floating-cart" aria-label="Keranjang Belanja">
+      <span class="floating-cart-icon">🛒</span>
+      <span class="floating-cart-badge" id="floating-cart-badge">0</span>
+    </a>
     
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="./script.js"></script>

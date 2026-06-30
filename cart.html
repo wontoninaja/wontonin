@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keranjang Belanja - Mini Wonton</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="btn-back">Kembali ke Menu</a>
+      </div>
+    </nav>
+
+    <div class="header">
+      <h1>KERANJANG BELANJA</h1>
+      <p class="tagline">Ringkasan produk kamu sebelum konfirmasi final</p>
+    </div>
+
+    <div class="container">
+      <div class="form-box">
+        <input type="text" id="nama" placeholder="Nama (untuk informasi pemesanan)" required />
+        <input type="text" id="wa" placeholder="No WhatsApp (untuk informasi pemesanan)" required />
+      </div>
+
+      <h2 class="judul produk">Produk di Keranjang</h2>
+
+      <div id="cart-add-more" class="cart-add-more" style="display: none">
+        <button type="button" id="btn-tambah-menu" class="cart-add-menu-btn" aria-expanded="false">
+          + Tambah Menu Lain
+        </button>
+        <div id="cart-add-menu-dropdown" class="cart-add-menu-dropdown" hidden>
+          <a href="order.html" class="cart-add-menu-link">Ready to Eat</a>
+          <a href="pesan_rtc.html" class="cart-add-menu-link">Ready to Cook</a>
+          <a href="addon.html" class="cart-add-menu-link">Add-On / Tambahan Saus</a>
+        </div>
+      </div>
+
+      <div id="cart-empty" class="cart-empty">
+        <p class="cart-empty-text">Keranjang kamu masih kosong. Silakan pilih produk dulu dari menu.</p>
+        <div class="cart-empty-actions">
+          <a href="order.html" class="cart-cta-btn cart-cta-rte">Belanja Ready to Eat</a>
+          <a href="pesan_rtc.html" class="cart-cta-btn cart-cta-rtc">Belanja Ready to Cook</a>
+          <a href="addon.html" class="cart-cta-btn cart-cta-addon">Belanja Add-On / Tambahan Saus</a>
+        </div>
+      </div>
+
+      <div id="cart-list" class="cart-list"></div>
+
+      <div id="cart-checkout-section">
+      <div class="total-box" style="margin-top: 20px">
+        Total Bayar
+        <b> Rp <span id="cart-total">0</span> </b>
+      </div>
+
+      <!-- Pilih Tanggal dan Shift -->
+      <div
+        id="date-section"
+        style="
+          display: block;
+          margin-top: 20px;
+          padding: 15px;
+          background: #fff0d4;
+          border-radius: 15px;
+          border-left: 4px solid #ff6600;
+        "
+      >
+        <h3 style="color: #d34f21; margin: 0 0 8px 0">📅 Pilih Tanggal & Shift</h3>
+        <input
+          type="text"
+          id="delivery-date-select"
+          placeholder="Pilih Tanggal"
+          style="width: 100%; padding: 12px; margin-bottom: 12px"
+        />
+        <select id="shift-select" style="width: 100%; padding: 12px">
+          <option value="">-- Pilih shift --</option>
+          <option value="13.00-16.00">🌅 Siang (13.00-16.00)</option>
+        </select>
+        <div
+          id="date-warning"
+          style="
+            display: none;
+            margin-top: 10px;
+            padding: 8px;
+            background: #ffe0e0;
+            border-radius: 8px;
+            color: #d32f2f;
+          "
+        ></div>
+      </div>
+
+      <!-- FITUR ANTAR KE -->
+      <div
+        id="delivery-location-section"
+        style="
+          display: block;
+          margin-top: 20px;
+          padding: 15px;
+          background: #fff0d4;
+          border-radius: 15px;
+          border-left: 4px solid #ff6600;
+        "
+      >
+        <h3 style="color: #d34f21; margin: 0 0 8px 0">📍 Antar Ke</h3>
+        <select id="antarKe" style="width: 100%; padding: 12px">
+          <option value="">-- Pilih Lokasi --</option>
+          <option value="STID Al-Hadid">STID Al-Hadid</option>
+          <option value="Al-Kahfi Sawahan">Al-Kahfi Sawahan</option>
+          <option value="Custom">Custom</option>
+        </select>
+        <div id="boxCustom" style="display: none; margin-top: 10px">
+          <label for="customAntarKe">Masukkan lokasi custom Anda</label>
+          <input
+            type="text"
+            id="customAntarKe"
+            placeholder="Masukkan lokasi custom Anda"
+            style="width: 100%; padding: 12px; margin-top: 5px"
+          />
+        </div>
+      </div>
+
+      <!-- BUTTON FINAL -->
+      <button type="button" class="order-btn" id="btn-konfirmasi" style="margin-top: 20px">
+        Konfirmasi Pesan Sekarang
+      </button>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="./script.js"></script>
+    <script src="./electric.js"></script>
+    <script src="./music.js"></script>
+  </body>
+</html>
+
