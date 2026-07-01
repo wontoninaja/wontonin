@@ -1,6 +1,6 @@
 const API =
   "https://script.google.com/macros/s/AKfycbzUGNUzl_-oalCHrvkl4IOawJO61o84eU79fwnAyVv9kycPDvq4Mwd4OLI6yPqir2yB/exec";
-const MAX_ORDER_PER_DAY = 70;
+const MAX_ORDER_PER_DAY = 60;
 const API_LOG = "[MiniWonton API]";
 
 /** Aturan tanggal bisnis (dropdown & validasi order web) */
@@ -30,7 +30,6 @@ const TANGGAL_KUNCI_SOLD_OUT = new Set([
   "2026-06-02",
   "2026-06-03",
   "2026-07-01",
-  "2026-07-03",
 ]);
 const JENDELA_HARI_TAMPIL = 14;
 
